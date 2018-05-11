@@ -9,26 +9,14 @@ namespace ATM
 {
    public class TrackUpdate
     {
-        //opdater dens værdi. De tracks der er indenfor area
-        //jeg får en liste af tracks fra filtering
-        //hvad skal den opdatere?
-        //og hvor kommer de fra
-        //og hvor skal de placeres henne
-
-        //to liser
-        //en gammel og ny
-        //hvor var jeg før 
-        //find tag samme tag, dvs samme fly 
-        //calvelocity
-        //calcourse
-       
-        public List<IFiltering> oldList { get; }                      
+        public List<IFiltering> oldList { get; set; }                      
         //public List<IFiltering> newList { get; }
-
-
-        public TrackUpdate(List<IFiltering> newList)   //From Filtering
+        public TrackUpdate(List<IFiltering> newList) 
         {
+        }
 
+        public void Update(List<IFiltering> newList) //From Filtering
+        {
             if (oldList == null)                      //Entrypoint
             {
                 oldList = new List<IFiltering>();
@@ -46,16 +34,17 @@ namespace ATM
                 {
                     if(newTrack.Tag==oldTrack.Tag)
                         Console.WriteLine("Equal");
+                    CalVelocity(newTrack,oldTrack);
+                    CalCourse(newTrack, oldTrack);
                 }
             }
 
-            
         }
 
-        public void CalVelocity(TrackData track1, TrackData track2)
+        public void CalVelocity(IFiltering track1, IFiltering track2)
         {
             //Coordinates 
-            x1 = track1.X;
+            newList.x1 = track1.X;
             x2 = track2.X;
             y1 = track1.Y;
             y2 = track2.Y;
