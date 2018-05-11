@@ -45,7 +45,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IUpdateTrack.cs" />
+    <Compile Include="Interfaces\ITrackUpdate.cs" />
+    <Compile Include="Filtering.cs" />
+    <Compile Include="Interfaces\IFiltering.cs" />
     <Compile Include="Parsing.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
