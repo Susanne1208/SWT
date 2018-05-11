@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATM.Interfaces
 {
-    public interface IUpdateTrack
+    public interface ITrackUpdate
     {
         void Update(List<IFiltering> newList);
         void CalVelocity(IFiltering track1, IFiltering track2);
