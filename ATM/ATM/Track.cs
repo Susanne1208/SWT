@@ -5,11 +5,40 @@ using System.Text;
 using System.Threading.Tasks;
 using ATM.Data;
 using ATM.Interfaces;
+using TransponderReceiver;
 
 namespace ATM
 {
     class Track : ITrack
     {
+
+        private List<TrackData> trackList;
+        private ITrackDataReceiver receiverOutput;
+
+
+
+        public Track(ITransponderReceiver receiver, ITrackDataReceiver trackDataReceiver)
+        {
+            receiver.TransponderDataReady += Data;
+            receiverOutput = trackDataReceiver; 
+            trackList = new List<TrackData>();
+
+        }
+
+        public void Data(object o, RawTransponderDataEventArgs args)
+        {
+            trackList.Clear();
+
+            foreach (var data in args.TransponderData)
+            {
+                trackList.Add(ConvertData(data));
+        
+            }
+
+            receiverOutput.ReceiveTracks(trackList);
+        }
+
+
         public TrackData ConvertData(string data)
         {
             TrackData track = new TrackData();

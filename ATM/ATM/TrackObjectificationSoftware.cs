@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiver;
-using System.Collections.Generic;
 using ATM.Interfaces;
 
 namespace ATM

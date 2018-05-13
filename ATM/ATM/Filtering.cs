@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using ATM.Data;
+using ATM.Interfaces;
 
 namespace ATM
 {
