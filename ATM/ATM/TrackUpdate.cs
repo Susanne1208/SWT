@@ -28,12 +28,12 @@ namespace ATM
                 foreach (var newTrack in newList)
                 {
 
-                    for (int i = 0; i > oldList.Count; i++)
+                    foreach (var oldTrack in oldList)
                     {
-                        if (newTrack.Tag == oldList[i].Tag)
+                        if (newTrack.Tag == oldTrack.Tag)
                         {
-                            CalVelocity(newTrack, oldList[i], i); //i fortæller hvor oldtrack befinder sig 
-                            CalCourse(newTrack, oldList[i], i);
+                            CalVelocity(newTrack, oldTrack); //i fortæller hvor oldtrack befinder sig 
+                            CalCourse(newTrack, oldTrack);
                         }
                     }
                 }
@@ -49,7 +49,7 @@ namespace ATM
         }
 
 
-        public void CalVelocity(IFiltering track1, IFiltering track2, int index)
+        public double CalVelocity(IFiltering track1, IFiltering track2)
         {
 
             // calculate velocity
@@ -66,12 +66,12 @@ namespace ATM
 
             double time = track2.Timestamp.Subtract(track1.Timestamp).TotalSeconds;
 
-            oldList[index].Velocity = distance / time;  //Updating speed
+            return distance / time;  //Updating speed
         }
 
 
 
-        public void CalCourse(IFiltering track1, IFiltering track2, int index)
+        public double CalCourse(IFiltering track1, IFiltering track2)
         {
             double deltaX = track2.X - track1.X;
             double deltaY = track2.Y - track1.Y;
@@ -97,7 +97,7 @@ namespace ATM
                 }
             }
 
-           oldList[index].Course = Degree;
+           return Degree;
 
         }
 
