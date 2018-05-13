@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\ITrack.cs" />
+    <Compile Include="Interfaces\ITrackData.cs" />
     <Compile Include="Interfaces\ITrackDataReceiver.cs" />
     <Compile Include="Interfaces\ITrackUpdate.cs" />
     <Compile Include="Filtering.cs" />
