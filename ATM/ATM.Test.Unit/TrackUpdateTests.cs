@@ -10,11 +10,13 @@ namespace ATM.Test.Unit
     [TestFixture]
     public class TrackUpdateTests
     {
+        private List<IFiltering> _filtering;
 
         [Test]
         public void Update_UpdateOldAndNew_returns()
         {
             var uut = new TrackUpdate();    //declare my class under test
+            Assert.That(uut.Update(_filtering), Is.EqualTo(true));
         }
 
         [Test]
