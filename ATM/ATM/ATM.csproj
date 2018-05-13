@@ -45,6 +45,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventRendition.cs" />
+    <Compile Include="Interfaces\IEventRendition.cs" />
     <Compile Include="Interfaces\ITrackUpdate.cs" />
     <Compile Include="Filtering.cs" />
     <Compile Include="Interfaces\IFiltering.cs" />
