@@ -4,21 +4,22 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using ATM.Data;
 using ATM.Interfaces;
 
 namespace ATM
 {
    public class TrackUpdate : ITrackUpdate
     {
-        public List<ITrackData> oldList { get; set; }                      
+        public List<TrackData> oldList { get; set; }                      
         //public List<IFiltering> newList { get; }
 
 
-        public List<ITrackData> Update(List<ITrackData> newList)
+        public List<TrackData> Update(List<TrackData> newList)
         {
             if (oldList == null)                      //Entrypoint
             {
-                oldList = new List<ITrackData>();
+                oldList = new List<TrackData>();
 
                 foreach (var track in newList)
                 {
@@ -49,7 +50,7 @@ namespace ATM
             return oldList;
         }
 
-        public int CalVelocity(ITrackData track1, ITrackData track2)
+        public int CalVelocity(TrackData track1, TrackData track2)
         {
 
             // calculate velocity
@@ -69,7 +70,7 @@ namespace ATM
             return (int)distance /(int) time;  //Updating speed
         }
 
-        public double CalCourse(ITrackData track1, ITrackData track2)
+        public double CalCourse(TrackData track1, TrackData track2)
         {
             double deltaX = track2.X - track1.X;
             double deltaY = track2.Y - track1.Y;
