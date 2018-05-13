@@ -8,7 +8,7 @@ namespace ATM
 {
     interface IEventRendition
     {
-        void LogToFile();
-        void PrintEvent();
+        void LogToFile(SeperationData seperationData);
+        void PrintEvent(SeperationData seperationData);
     }
 }

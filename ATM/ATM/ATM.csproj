@@ -55,6 +55,7 @@
     <Compile Include="Parsing.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeperationData.cs" />
     <Compile Include="TrackData.cs" />
     <Compile Include="TrackRendition.cs" />
     <Compile Include="TrackUpdate.cs" />
