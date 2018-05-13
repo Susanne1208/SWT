@@ -11,15 +11,15 @@ namespace ATM
 {
    public class TrackUpdate : ITrackUpdate
     {
-        public List<TrackData> oldList { get; set; }                      
+        public List<ITrackData> oldList { get; set; }                      
         //public List<IFiltering> newList { get; }
 
 
-        public List<TrackData> Update(List<TrackData> newList)
+        public List<ITrackData> Update(List<ITrackData> newList)
         {
             if (oldList == null)                      //Entrypoint
             {
-                oldList = new List<TrackData>();
+                oldList = new List<ITrackData>();
 
                 foreach (var track in newList)
                 {
@@ -50,7 +50,7 @@ namespace ATM
             return oldList;
         }
 
-        public int CalVelocity(TrackData track1, TrackData track2)
+        public int CalVelocity(ITrackData track1, ITrackData track2)
         {
 
             // calculate velocity
