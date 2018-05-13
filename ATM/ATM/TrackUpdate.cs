@@ -70,7 +70,7 @@ namespace ATM
             return (int)distance /(int) time;  //Updating speed
         }
 
-        public double CalCourse(TrackData track1, TrackData track2)
+        public double CalCourse(ITrackData track1, ITrackData track2)
         {
             double deltaX = track2.X - track1.X;
             double deltaY = track2.Y - track1.Y;
