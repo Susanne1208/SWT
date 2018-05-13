@@ -8,8 +8,8 @@ namespace ATM.Interfaces
 {
     public interface ITrackUpdate
     {
-        List<IFiltering> Update(List<IFiltering> newList);
-        void CalVelocity(IFiltering track1, IFiltering track2, int index);
-        void CalCourse(IFiltering track1, IFiltering track2, int index);
+        List<ITrackData> Update(List<ITrackData> newList);
+        double CalVelocity(ITrackData track1, ITrackData track2);
+        double CalCourse(ITrackData track1, ITrackData track2);
     }
 }

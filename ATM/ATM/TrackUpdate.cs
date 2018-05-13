@@ -10,13 +10,15 @@ namespace ATM
 {
    public class TrackUpdate : ITrackUpdate
     {
-        public List<IFiltering> oldList { get; set; }                      
+        public List<ITrackData> oldList { get; set; }                      
         //public List<IFiltering> newList { get; }
-        public List<IFiltering> Update(List<IFiltering> newList) //From Filtering
+
+
+        public List<ITrackData> Update(List<ITrackData> newList)
         {
             if (oldList == null)                      //Entrypoint
             {
-                oldList = new List<IFiltering>();
+                oldList = new List<ITrackData>();
 
                 foreach (var track in newList)
                 {
@@ -45,11 +47,9 @@ namespace ATM
             }
 
             return oldList;
-
         }
 
-
-        public double CalVelocity(IFiltering track1, IFiltering track2)
+        public double CalVelocity(ITrackData track1, ITrackData track2)
         {
 
             // calculate velocity
@@ -64,14 +64,12 @@ namespace ATM
             //Distance between the 2 tracks
             double distance = Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
 
-            double time = track2.Timestamp.Subtract(track1.Timestamp).TotalSeconds;
+            double time = track2.TimeStamp.Subtract(track1.TimeStamp).TotalSeconds;
 
             return distance / time;  //Updating speed
         }
 
-
-
-        public double CalCourse(IFiltering track1, IFiltering track2)
+        public double CalCourse(ITrackData track1, ITrackData track2)
         {
             double deltaX = track2.X - track1.X;
             double deltaY = track2.Y - track1.Y;
@@ -97,12 +95,11 @@ namespace ATM
                 }
             }
 
-           return Degree;
-
+            return Degree;
         }
 
 
-       
+
     }
 
 
