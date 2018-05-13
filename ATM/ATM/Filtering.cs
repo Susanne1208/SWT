@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
+using ATM.Data;
 using ATM.Interfaces;
 
 namespace ATM
 {
     public class Filtering : Interfaces.IFiltering
     {
-        private ITrackUpdate _trackUpdate;
+        private readonly ITrackUpdate _trackUpdate;
         public int _minXCoordinate { get; set; }
         public int _maxXCoordinate { get; set; }
         public int _minYCoordinate { get; set; }
         public int _maxYCoordinate { get; set; }
         public int _minAltitude { get; set; }
         public int _maxAltitude { get; set; }
-
+        
         public Filtering(ITrackUpdate trackUpdate)
         {
             _minXCoordinate = 10000;
@@ -36,7 +37,7 @@ namespace ATM
             _trackUpdate = trackUpdate;
         }
 
-        public void ValidateTracks(List<ITrackData> trackData)
+        public void ValidateTracks(List<TrackData> trackData)
         {
             List<TrackData> newTracks = new List<TrackData>();
 

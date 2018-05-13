@@ -11,14 +11,14 @@ namespace ATM
 {
     class Parsing
     {
-        private ITrackDataReceiver receiverOutput;
+        private IFiltering _filtering;
         List<TrackData> trackList = new List<TrackData>();
 
 
-        public Parsing(ITransponderReceiver receiver, ITrackDataReceiver trackDataReceiver) //subscring
+        public Parsing(ITransponderReceiver receiver, IFiltering filtering) //subscring
         {
             receiver.TransponderDataReady += Data;
-            receiverOutput = trackDataReceiver;
+            _filtering = filtering;
             trackList = new List<TrackData>();
 
         }
@@ -54,7 +54,7 @@ namespace ATM
 
             }
 
-            receiverOutput.ReceiveTracks(trackList);
+            _filtering.ValidateTracks(trackList);
         }
 
 

@@ -47,17 +47,15 @@
   <ItemGroup>
     <Compile Include="Interfaces\ITrack.cs" />
     <Compile Include="Interfaces\ITrackData.cs" />
-    <Compile Include="Interfaces\ITrackDataReceiver.cs" />
     <Compile Include="Interfaces\ITrackUpdate.cs" />
     <Compile Include="Filtering.cs" />
     <Compile Include="Interfaces\IFiltering.cs" />
+    <Compile Include="Interfaces\ITrackRendition.cs" />
     <Compile Include="Parsing.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Track.cs" />
     <Compile Include="TrackData.cs" />
-    <Compile Include="TrackDataReceiver.cs" />
-    <Compile Include="TrackObjectificationSoftware.cs" />
+    <Compile Include="TrackRendition.cs" />
     <Compile Include="TrackUpdate.cs" />
   </ItemGroup>
   <ItemGroup>

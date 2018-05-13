@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using ATM.Data;
 
-namespace ATM.Interfaces
+namespace ATM
 {
-    public interface ITrackDataReceiver
+    interface ITrackRendition
     {
-        void ReceiveTracks(List<TrackData> tracks);
+        void Print(List<TrackData> trackDataList);
     }
 }

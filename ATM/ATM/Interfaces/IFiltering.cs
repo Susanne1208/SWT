@@ -12,6 +12,6 @@ namespace ATM.Interfaces
         int _minAltitude { get; set; }
         int _maxAltitude { get; set; }
 
-        void ValidateTracks(List<TrackData> trackDataList);
+        void ValidateTracks(List<TrackData> trackData);
     }
 }

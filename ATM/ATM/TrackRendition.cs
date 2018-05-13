@@ -4,18 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATM.Data;
-using ATM.Interfaces;
 
 namespace ATM
 {
-    public class TrackDataReceiver: ITrackDataReceiver
+    public class TrackRendition : ITrackRendition
     {
-        public void ReceiveTracks(List<TrackData> tracks)
+        public TrackRendition()
         {
-            foreach (var track in tracks)
+        }
+
+        public void Print(List<TrackData> trackDataList)
+        {
+            foreach (var track in trackDataList)
             {
                 System.Console.WriteLine(track);
-                
             }
         }
     }
