@@ -26,7 +26,7 @@ namespace ATM
         }
 
         public Filtering(int minXCoordinate, int maxXCoordinate, int minYCoordinate, 
-            int maxYCoordinate, int minAltitude, int maxAltitude, ITrackUpdate trackUpdate)
+            int maxYCoordinate, int minAltitude, int maxAltitude, TrackUpdate trackUpdate)
         {
             _minXCoordinate = minXCoordinate;
             _maxXCoordinate = maxXCoordinate;

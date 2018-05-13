@@ -18,6 +18,5 @@ namespace ATM.Interfaces
         DateTime TimeStamp { get; set; }
 
         string ToString();
-
     }
 }

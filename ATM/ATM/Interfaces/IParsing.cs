@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATM.Data;
+using TransponderReceiver;
 
-namespace ATM.Interfaces
+namespace ATM
 {
-    interface ITrack
+    interface IParsing
     {
         TrackData ConvertData(string data);
-
+        void Data(object o, RawTransponderDataEventArgs args);
     }
 }

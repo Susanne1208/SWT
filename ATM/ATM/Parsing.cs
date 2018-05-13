@@ -9,17 +9,16 @@ using TransponderReceiver;
 
 namespace ATM
 {
-    class Parsing
+    class Parsing : IParsing
     {
-        private IFiltering _filtering;
-        List<TrackData> trackList = new List<TrackData>();
-
-
+        private readonly IFiltering _filtering;
+        private List<TrackData> _trackList;
+        
         public Parsing(ITransponderReceiver receiver, IFiltering filtering) //subscring
         {
             receiver.TransponderDataReady += Data;
             _filtering = filtering;
-            trackList = new List<TrackData>();
+            _trackList = new List<TrackData>();
 
         }
         public TrackData ConvertData(string data) //parsing
@@ -56,9 +55,5 @@ namespace ATM
 
             _filtering.ValidateTracks(trackList);
         }
-
-
     }
-
-
 }
