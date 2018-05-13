@@ -4,18 +4,15 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using ATM.Interfaces;
 
 namespace ATM
 {
-   public class TrackUpdate
+   public class TrackUpdate : ITrackUpdate
     {
         public List<IFiltering> oldList { get; set; }                      
         //public List<IFiltering> newList { get; }
-        public TrackUpdate(List<IFiltering> newList) 
-        {
-        }
-
-        public void Update(List<IFiltering> newList) //From Filtering
+        public List<IFiltering> Update(List<IFiltering> newList) //From Filtering
         {
             if (oldList == null)                      //Entrypoint
             {
@@ -24,42 +21,57 @@ namespace ATM
                 foreach (var track in newList)
                 {
                     oldList.Add(track);               //now OldList is equal to Newlist
-
                 }
             }
-
-            foreach (var newTrack in newList)
+            else
             {
-                foreach (var oldTrack in oldList)
+                foreach (var newTrack in newList)
                 {
-                    if(newTrack.Tag==oldTrack.Tag)
-                        Console.WriteLine("Equal");
-                    CalVelocity(newTrack,oldTrack);
-                    CalCourse(newTrack, oldTrack);
+
+                    foreach (var oldTrack in oldList)
+                    {
+                        if (newTrack.Tag == oldTrack.Tag)
+                        {
+                            CalVelocity(newTrack, oldTrack); //i fortæller hvor oldtrack befinder sig 
+                            CalCourse(newTrack, oldTrack);
+                        }
+                    }
                 }
+
+                //foreach (var newTrack in newList)
+                //{
+                //    oldList.Add(newTrack);
+                //}
             }
+
+            return oldList;
 
         }
 
-        public void CalVelocity(IFiltering track1, IFiltering track2)
+
+        public double CalVelocity(IFiltering track1, IFiltering track2)
         {
+
+            // calculate velocity
+
+
             //Coordinates 
-            newList.x1 = track1.X;
-            x2 = track2.X;
-            y1 = track1.Y;
-            y2 = track2.Y;
+            int x1 = track1.X;
+            int x2 = track2.X;
+            int y1 = track1.Y;
+            int y2 = track2.Y;
 
             //Distance between the 2 tracks
             double distance = Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
 
             double time = track2.Timestamp.Subtract(track1.Timestamp).TotalSeconds;
 
-            track2.Velocity = distance / time;
+            return distance / time;  //Updating speed
         }
 
 
 
-        public void CalCourse(TrackData track1, TrackData track2)
+        public double CalCourse(IFiltering track1, IFiltering track2)
         {
             double deltaX = track2.X - track1.X;
             double deltaY = track2.Y - track1.Y;
@@ -85,13 +97,14 @@ namespace ATM
                 }
             }
 
-            track2.Course = Degree;
+           return Degree;
 
         }
 
 
+       
     }
 
 
 }
-}
+
