@@ -9,7 +9,7 @@ namespace ATM.Interfaces
     public interface ITrackUpdate
     {
         List<ITrackData> Update(List<ITrackData> newList);
-        double CalVelocity(ITrackData track1, ITrackData track2);
+        int CalVelocity(ITrackData track1, ITrackData track2);
         double CalCourse(ITrackData track1, ITrackData track2);
     }
 }
