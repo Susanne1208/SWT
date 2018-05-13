@@ -4,14 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATM.Data;
-using ATM.Interfaces;
-using TransponderReceiver;
 
-namespace ATM
+namespace ATM.Interfaces
 {
-    class Parsing
+    public interface ITrackDataReceiver
     {
-       
-
+        void ReceiveTracks(List<TrackData> tracks);
     }
 }
