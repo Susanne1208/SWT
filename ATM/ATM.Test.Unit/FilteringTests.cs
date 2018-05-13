@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ATM;
+using ATM.Interfaces;
 using NUnit.Framework;
 using NSubstitute;
 

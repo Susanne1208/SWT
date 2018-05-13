@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using ATM.Data;
 using ATM.Interfaces;
 
 namespace ATM
 {
-    public class Filtering : IFiltering
+    public class Filtering : Interfaces.IFiltering
     {
-        private TrackUpdate _trackUpdate;
+        private ITrackUpdate _trackUpdate;
         public int _minXCoordinate { get; set; }
         public int _maxXCoordinate { get; set; }
         public int _minYCoordinate { get; set; }
@@ -37,21 +36,21 @@ namespace ATM
             _trackUpdate = trackUpdate;
         }
 
-        public void ValidateTracks(List<TrackData>)
+        public void ValidateTracks(List<ITrackData> trackData)
         {
-            List<TrackData> NewTracks = new List<TrackData>();
+            List<TrackData> newTracks = new List<TrackData>();
 
-            foreach (var Track in TrackData)
+            foreach (var track in trackData)
             {
-                if (Track.X >= _minXCoordinate && Track.X <= _maxXCoordinate
-                                               && Track.Y >= _minYCoordinate && Track.Y <= _maxYCoordinate
-                                               && Track.Altitude >= _minAltitude && Track.Altitude <= _maxAltitude)
+                if (track.X >= _minXCoordinate && track.X <= _maxXCoordinate
+                                               && track.Y >= _minYCoordinate && track.Y <= _maxYCoordinate
+                                               && track.Altitude >= _minAltitude && track.Altitude <= _maxAltitude)
                 {
-                    NewTracks.Add(Track);
+                    newTracks.Add(track);
                 }
             }
-            //Kald beregningsfunktioner i TrackUpdate med liste af nye TrackData
-            //_trackUpdate.
+            
+            _trackUpdate.Update(newTracks);
         }
     }
 }
