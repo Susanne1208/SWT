@@ -7,7 +7,7 @@ using ATM.Interfaces;
 
 namespace ATM.Data
 {
-    public class TrackData : ITrackData
+    public class TrackData
     {
 
         public string Tag { get; set; }
