@@ -49,7 +49,7 @@ namespace ATM
             return oldList;
         }
 
-        public double CalVelocity(ITrackData track1, ITrackData track2)
+        public int CalVelocity(ITrackData track1, ITrackData track2)
         {
 
             // calculate velocity
@@ -66,7 +66,7 @@ namespace ATM
 
             double time = track2.TimeStamp.Subtract(track1.TimeStamp).TotalSeconds;
 
-            return distance / time;  //Updating speed
+            return (int)distance /(int) time;  //Updating speed
         }
 
         public double CalCourse(ITrackData track1, ITrackData track2)
