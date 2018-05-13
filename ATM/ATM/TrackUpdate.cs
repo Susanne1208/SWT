@@ -8,7 +8,7 @@ using ATM.Interfaces;
 
 namespace ATM
 {
-   public class TrackUpdate : IUpdateTrack
+   public class TrackUpdate : ITrackUpdate
     {
         public List<IFiltering> oldList { get; set; }                      
         //public List<IFiltering> newList { get; }
