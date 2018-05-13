@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ATM.Data;
 
 namespace ATM.Interfaces
 {
@@ -11,6 +12,6 @@ namespace ATM.Interfaces
         int _minAltitude { get; set; }
         int _maxAltitude { get; set; }
 
-        void ValidateTracks(List<ITrackData>);
+        void ValidateTracks(List<TrackData> trackDataList);
     }
 }

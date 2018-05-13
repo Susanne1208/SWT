@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ATM.Data;
 using ATM.Interfaces;
 
 namespace ATM
@@ -36,7 +37,7 @@ namespace ATM
             _trackUpdate = trackUpdate;
         }
 
-        public void ValidateTracks(List<ITrackData> trackData)
+        public void ValidateTracks(List<TrackData> trackData)
         {
             List<TrackData> newTracks = new List<TrackData>();
 
@@ -49,7 +50,7 @@ namespace ATM
                     newTracks.Add(track);
                 }
             }
-            
+
             _trackUpdate.Update(newTracks);
         }
     }
