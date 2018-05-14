@@ -58,7 +58,7 @@ namespace ATM
             }
             
             _trackRendition.Print(newList);
-            //_proximityDetection.IsTracksInConflict();
+            _proximityDetection.CheckProximityDetection(newList);
             
         }
 
