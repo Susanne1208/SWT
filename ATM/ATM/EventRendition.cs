@@ -19,6 +19,7 @@ namespace ATM
             //string text = "Planes in conflict: " + seperationData.TAG1 + " and " + seperationData.TAG2 +
             //                  "\nTime of occurance: " + seperationData.TimeStamp;
             //File.WriteAllText(path, text);
+            //System.Console.WriteLine("TEST);
         }
 
         public void PrintEvent()

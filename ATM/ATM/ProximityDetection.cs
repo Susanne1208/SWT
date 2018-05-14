@@ -11,59 +11,51 @@ namespace ATM
 {
     public class ProximityDetection : IProximityDetection
     {
-
-        //Horizontal seperation less than 5000 meters
-        private int HorizontalSeperation = 5000;
-
-        //vertical seperation less than 300 meters
-        private int VerticalSeperation = 300;
+        private int HorizontalSeperation = 5000; //Horizontal seperation less than 5000 meters
+        private int VerticalSeperation = 300; //vertical seperation less than 300 meters
 
         private readonly IEventRendition _eventRendition;
 
 
         public ProximityDetection(IEventRendition eventRendition)
         {
+            //Need to call LogToFile
             _eventRendition = eventRendition;
         }
 
         public void CheckProximityDetection(List<ITrackData> trackDataList)
         {
-            
-            foreach (var trackOne in trackDataList)
+            //Runs through the tracks in the trackDataList to see if any tracks are in collision distance
+            foreach (var track1 in trackDataList)
             {
-                foreach (var trackTwo in trackDataList)
+                foreach (var track2 in trackDataList)
                 {
-
-                    double x1 = trackOne.X;
-                    double x2 = trackTwo.X;
-                    double y1 = trackOne.Y;
-                    double y2 = trackTwo.Y;
-                    double alt1 = trackOne.Altitude;
-                    double alt2 = trackTwo.Altitude;
+                    //Track data
+                    double x1 = track1.X;
+                    double x2 = track2.X;
+                    double y1 = track1.Y;
+                    double y2 = track2.Y;
+                    double alt1 = track1.Altitude;
+                    double alt2 = track1.Altitude;
 
                     
-                    //Formula: distance = sqrt((x1-x2)^2+(y1-y2)^2)
+                    //Formula: sqrt((x1-x2)^2+(y1-y2)^2)
                     var horizantalDistance = Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
 
                     //vertical seperation less than 300 meters
                     var veritalDistance = Math.Abs(alt1 - alt2); 
 
                     // If the to two planes tag is different and is conflicting with the minimum seperation.
-                    if (trackOne.Tag != trackTwo.Tag && veritalDistance < VerticalSeperation && horizantalDistance < HorizontalSeperation)
+                    if (track1.Tag != track2.Tag && veritalDistance < VerticalSeperation && horizantalDistance < HorizontalSeperation)
                     {
-                        //Kan ikke kalde funktioner....
+                        //Kan ikke kalde funktioner.... 
                         //_eventRendition.LogToFile();
                         //_eventRendition.PrintEvent();
-
+                        
                     }
                 }
-
             }
-
-            
-
         }
-
     }
 }
 

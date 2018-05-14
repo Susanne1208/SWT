@@ -9,8 +9,8 @@ namespace ATM.Interfaces
 {
     public interface IProximityDetection
     {
-        //void CheckForSepeation(TrackData track1, TrackData track2);
         void CheckProximityDetection(List<ITrackData> trackDataList);
-        //bool IsTracksInConflict(TrackData track1, TrackData track2);
+        //bool IsTracksInConflict(TrackData track1, TrackData track2); 
+
     }
 }
