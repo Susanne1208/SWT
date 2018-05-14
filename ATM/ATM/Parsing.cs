@@ -32,7 +32,7 @@ namespace ATM
             track.X = int.Parse(words[1]);
             track.Y = int.Parse(words[2]);
             track.Altitude = int.Parse(words[3]);
-            track.TimeStamp = DateTime.ParseExact(words[4], "yyyyMMddHHmmssff",
+            track.TimeStamp = DateTime.ParseExact(words[4], "yyyyMMddHHmmssfff",
                 System.Globalization.CultureInfo.InvariantCulture);
             track.Course = 0;
             track.Velocity = 0;
