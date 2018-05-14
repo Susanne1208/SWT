@@ -58,6 +58,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProximityDetection.cs" />
+    <Compile Include="ProximityDetectionData.cs" />
     <Compile Include="TrackData.cs" />
     <Compile Include="TrackRendition.cs" />
     <Compile Include="TrackUpdate.cs" />
