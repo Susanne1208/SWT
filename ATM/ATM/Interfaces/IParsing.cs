@@ -8,7 +8,7 @@ using TransponderReceiver;
 
 namespace ATM
 {
-    interface IParsing
+    public interface IParsing
     {
         TrackData ConvertData(string data);
         void Data(object o, RawTransponderDataEventArgs args);
