@@ -8,7 +8,7 @@ namespace ATM.Interfaces
 {
     public interface ITrackUpdate
     {
-        void Update(List<ITrackData> newList, ITrackRendition trackRendition, IProximityDetection proximityDetection);
+        void Update(List<ITrackData> newList);
         int CalVelocity(ITrackData track1, ITrackData track2);
         int CalCourse(ITrackData track1, ITrackData track2);
     }
