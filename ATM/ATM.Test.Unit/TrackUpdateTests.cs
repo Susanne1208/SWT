@@ -202,14 +202,14 @@ namespace ATM.Test.Unit
             _trackRendition.Received().Print(_trackData);
         }
 
-        //[Test]
-        //public void ProximityDetection_IsCalled_True()
-        //{
-        //    var uut = new TrackUpdate();
-        //    uut.Update(_trackData, _trackRendition, _proximityDetection);
+        [Test]
+        public void ProximityDetection_IsCalled_True()
+        {
+            var uut = new TrackUpdate(_trackRendition, _proximityDetection);
+            uut.Update(_trackData);
 
-        //    _proximityDetection.Received().IsTracksInConflict(_trackData);
-        //}
+            _proximityDetection.Received().CheckProximityDetection(_trackData);
+        }
 
     }
 }
