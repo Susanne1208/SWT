@@ -20,6 +20,7 @@ namespace ATM
 
 
 
+
         public ProximityDetection(IEventRendition eventRendition, ProximityDetectionData proximityDetectionData)
         {
             //Need to call LogToFile
@@ -62,6 +63,7 @@ namespace ATM
                         //_eventRendition.PrintEvent(_proximityDetectionData);
                         _eventRendition.PrintEvent();
                         _eventRendition.LogToFile();
+                        
 
                         //the time og the event needs to be logged to files or application
                         //track1.TimeStamp = DateTime.Now;
@@ -72,21 +74,3 @@ namespace ATM
         }
     }
 }
-
-//public bool IsTracksInConflict(TrackData track1, TrackData track2)
-//{
-//    //Formula: distance = sqrt((x1-x2)^2+(y1-y2)^2)
-//    var horizantalDistance = Math.Sqrt(Math.Pow(track1.X - track2.X, 2) + Math.Pow(track2.Y - track2.Y, 2));
-
-//    //vertical seperation less than 300 meters
-//    var veritalDistance = Math.Abs(track1.Altitude - track2.Altitude);
-
-//    if (track1.Tag != track2.Tag && veritalDistance < VerticalSeperation &&
-//        horizantalDistance < HorizontalSeperation)
-//    {
-//        return true;
-//    }
-//    else return false;
-
-
-//}
