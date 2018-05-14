@@ -14,7 +14,7 @@ namespace ATM
         {
             ITransponderReceiver transponderDataReceiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
             ITrackUpdate trackUpdate = new TrackUpdate();
-            IFiltering filtering = new Filtering(trackUpdate);
+            IFiltering filtering = new Filtering();
 
             var decoder = new Parsing(transponderDataReceiver, filtering);
             System.Console.ReadLine();
