@@ -98,6 +98,7 @@ namespace ATM.Test.Unit
             _filtering.Received().ValidateTracks(Arg.Is<List<ITrackData>>(x => x[0].TimeStamp.Day == 01));
         }
 
+        [Test]
         public void OneTrackInList_TimeStampHourCorrect()
         {
             RaiseFakeEvent();
