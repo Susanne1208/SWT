@@ -59,8 +59,8 @@ namespace ATM.Test.Unit
             _fakeTrackDataList.Add(_fakeTrackDataInvalid);
         
             _uut.ValidateTracks(_fakeTrackDataList);
-            
-            //_trackUpdate.Received().Update(Arg.Is())
+
+            _trackUpdate.Received().Update(Arg.Is<List<ITrackData>>(x => x.Count == 0));
         }
 
     }
