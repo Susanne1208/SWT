@@ -50,8 +50,8 @@ namespace ATM
                     if (track1.Tag != track2.Tag && veritalDistance < VerticalSeperation && horizantalDistance < HorizontalSeperation)
                     {
                         //Kan ikke kalde funktioner.... 
-                        //_eventRendition.LogToFile();
-                        //_eventRendition.PrintEvent();
+                        _eventRendition.LogToFile();
+                        _eventRendition.PrintEvent();
 
                         //the time og the event needs to be logged to files or application
                         //track1.TimeStamp = DateTime.Now;
