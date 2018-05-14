@@ -15,7 +15,7 @@ namespace ATM
         //public List<IFiltering> newList { get; }
 
 
-        public List<ITrackData> Update(List<ITrackData> newList)
+        public void Update(List<ITrackData> newList)
         {
             if (oldList == null)                      //Entrypoint
             {
@@ -46,8 +46,9 @@ namespace ATM
                 //    oldList.Add(newTrack);
                 //}
             }
-
-            return oldList;
+            
+            //KALD EMMA OG SUSANNES FUNKTIONER
+            //return oldList;
         }
 
         public int CalVelocity(ITrackData track1, ITrackData track2)
@@ -64,13 +65,17 @@ namespace ATM
 
             //Distance between the 2 tracks
             double distance = Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
+            if (distance<0)
+            {
+                distance = distance * (-1);
+            }
 
             double time = track2.TimeStamp.Subtract(track1.TimeStamp).TotalSeconds;
 
             return (int)distance /(int) time;  //Updating speed
         }
 
-        public double CalCourse(ITrackData track1, ITrackData track2)
+        public int CalCourse(ITrackData track1, ITrackData track2)
         {
             double deltaX = track2.X - track1.X;
             double deltaY = track2.Y - track1.Y;
@@ -96,7 +101,7 @@ namespace ATM
                 }
             }
 
-            return Degree;
+            return (int)Degree;
         }
 
 
