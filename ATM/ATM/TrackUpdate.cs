@@ -67,10 +67,7 @@ namespace ATM
 
             //Distance between the 2 tracks
             double distance = Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
-            if (distance<0)
-            {
-                distance = distance * (-1);
-            }
+            
 
             double time = track2.TimeStamp.Subtract(track1.TimeStamp).TotalSeconds;
 
@@ -97,10 +94,10 @@ namespace ATM
                 Degree = radian / Math.PI * 180;
 
                 Degree = 90 - Degree;
-                if (Degree < 0)
-                {
-                    Degree += 360;
-                }
+                //if (Degree < 0)
+                //{
+                  //  Degree += 360;
+                //}
             }
 
             return (int)Degree;
