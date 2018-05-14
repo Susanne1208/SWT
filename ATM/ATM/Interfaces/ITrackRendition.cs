@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ATM.Data;
 
-namespace ATM
+namespace ATM.Interfaces
 {
     public interface ITrackRendition
     {
