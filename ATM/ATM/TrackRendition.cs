@@ -14,7 +14,7 @@ namespace ATM
         {
         }
 
-        public void Print(List<TrackData> trackDataList)
+        public void Print(List<ITrackData> trackDataList)
         {
             foreach (var track in trackDataList)
             {
