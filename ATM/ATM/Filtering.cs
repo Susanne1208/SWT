@@ -25,17 +25,18 @@ namespace ATM
             _trackUpdate = trackUpdate;
         }
 
-        public Filtering(int minXCoordinate, int maxXCoordinate, int minYCoordinate, 
-            int maxYCoordinate, int minAltitude, int maxAltitude, ITrackUpdate trackUpdate)
-        {
-            _minXCoordinate = minXCoordinate;
-            _maxXCoordinate = maxXCoordinate;
-            _minYCoordinate = minYCoordinate;
-            _maxYCoordinate = maxYCoordinate;
-            _minAltitude = minAltitude;
-            _maxAltitude = maxAltitude;
-            _trackUpdate = trackUpdate;
-        }
+        //Kan tilføjes, hvis det overvågede område skal ændres i størrelsen. 
+        //public Filtering(int minXCoordinate, int maxXCoordinate, int minYCoordinate, 
+        //    int maxYCoordinate, int minAltitude, int maxAltitude, ITrackUpdate trackUpdate)
+        //{
+        //    _minXCoordinate = minXCoordinate;
+        //    _maxXCoordinate = maxXCoordinate;
+        //    _minYCoordinate = minYCoordinate;
+        //    _maxYCoordinate = maxYCoordinate;
+        //    _minAltitude = minAltitude;
+        //    _maxAltitude = maxAltitude;
+        //    _trackUpdate = trackUpdate;
+        //}
 
         public void ValidateTracks(List<ITrackData> trackData)
         {
