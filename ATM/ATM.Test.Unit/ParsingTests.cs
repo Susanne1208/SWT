@@ -16,7 +16,6 @@ namespace ATM.Test.Unit
         private Parsing _uut; 
         private ITransponderReceiver _receiver;
         private RawTransponderDataEventArgs _fakeTransponderDataEventArgs;
-        private ITrackRendition _trackRendition;
         private IFiltering _filtering;
 
 
@@ -25,11 +24,10 @@ namespace ATM.Test.Unit
         public void Setup()
         {
             _receiver = Substitute.For<ITransponderReceiver>();
-            _filtering = Substitute.For<IFiltering>();
-            _trackRendition = Substitute.For<ITrackRendition>(); 
+            _filtering = Substitute.For<IFiltering>(); 
             _uut = new Parsing(_receiver, _filtering);
             _fakeTransponderDataEventArgs = new RawTransponderDataEventArgs(new List<string>()
-                { "JAS001;12345;67890;12000;20170101123456789" });
+                { "JAS001;12345;67890;12000;2016010110090901" });
 
         }
 
@@ -42,7 +40,7 @@ namespace ATM.Test.Unit
         public void OneTrackInList_CountCorrect()
         {
             RaiseFakeEvent();
-            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x.Count == 1));
+            _filtering.Received().ValidateTracks(Arg.Is<List<ITrackData>>(x => x.Count == 1));
 
         }
 
@@ -51,14 +49,15 @@ namespace ATM.Test.Unit
         public void OneTrackInList_TagCorrect()
         {
             RaiseFakeEvent();
-            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].Tag == "JAS001"));
+            _filtering.Received().ValidateTracks(Arg.Is<List<ITrackData>>(x => x[0].Tag == "JAS001"));
+
         }
 
         [Test]
         public void OneTrackInList_XCorrect()
         {
             RaiseFakeEvent();
-            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].X == 12345));
+            _filtering.Received().ValidateTracks(Arg.Is<List<ITrackData>>(x => x[0].X == 12345));
         }
 
 
@@ -66,14 +65,14 @@ namespace ATM.Test.Unit
         public void OneTrackInList_YCorrect()
         {
             RaiseFakeEvent();
-            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].Y == 67890));
+            _filtering.Received().ValidateTracks(Arg.Is<List<ITrackData>>(x => x[0].Y == 67890));
         }
 
         [Test]
         public void OneTrackInList_AltitudeCorrect()
         {
             RaiseFakeEvent();
-            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].Altitude == 12000));
+            _filtering.Received().ValidateTracks(Arg.Is<List<ITrackData>>(x => x[0].Altitude == 12000));
         }
 
 
@@ -81,7 +80,7 @@ namespace ATM.Test.Unit
         public void OneTrackInList_TimeStampYearCorrect()
         {
             RaiseFakeEvent();
-            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Year == 2017));
+            _filtering.Received().ValidateTracks(Arg.Is<List<ITrackData>>(x => x[0].TimeStamp.Year == 2016));
         }
 
 
@@ -89,27 +88,27 @@ namespace ATM.Test.Unit
         public void OneTrackInList_TimeStampMonthCorrect()
         {
             RaiseFakeEvent();
-            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Month == 01));
+            _filtering.Received().ValidateTracks(Arg.Is<List<ITrackData>>(x => x[0].TimeStamp.Month == 01));
         }
 
         [Test]
         public void OneTrackInList_TimeStampDayCorrect()
         {
             RaiseFakeEvent();
-            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Day == 01));
+            _filtering.Received().ValidateTracks(Arg.Is<List<ITrackData>>(x => x[0].TimeStamp.Day == 01));
         }
 
         public void OneTrackInList_TimeStampHourCorrect()
         {
             RaiseFakeEvent();
-            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Hour == 12));
+            _filtering.Received().ValidateTracks(Arg.Is<List<ITrackData>>(x => x[0].TimeStamp.Hour == 10));
         }
 
         [Test]
         public void OneTrackInList_TimeStampMinuteCorrect()
         {
             RaiseFakeEvent();
-            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Minute ==34 ));
+            _filtering.Received().ValidateTracks(Arg.Is<List<ITrackData>>(x => x[0].TimeStamp.Minute == 09 ));
         }
 
 
@@ -117,38 +116,35 @@ namespace ATM.Test.Unit
         public void OneTrackInList_TimeStampSecondCorrect()
         {
             RaiseFakeEvent();
-            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Second == 56));
+            _filtering.Received().ValidateTracks(Arg.Is<List<ITrackData>>(x => x[0].TimeStamp.Second == 09));
         }
 
         [Test]
         public void OneTrackInList_TimeStampMsCorrect()
         {
             RaiseFakeEvent();
-            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Millisecond == 789));
+            _filtering.Received().ValidateTracks(Arg.Is<List<ITrackData>>(x => x[0].TimeStamp.Millisecond == 10));
         }
 
         [Test]
         public void ThreeTracksInList_CountCorrect()
         {
-           _fakeTransponderDataEventArgs.TransponderData.Add("JAS002;12345;67890;12000;20151014123456789");
-           _fakeTransponderDataEventArgs.TransponderData.Add("JAS003;12345;67890;12000;20151014123456789");
+           _fakeTransponderDataEventArgs.TransponderData.Add("JAS002;12345;67890;12000;2016010110090901");
+           _fakeTransponderDataEventArgs.TransponderData.Add("JAS002;12345;67890;12000;2016010110090901");
            RaiseFakeEvent();
-            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x.Count == 3));
+            _filtering.Received().ValidateTracks(Arg.Is<List<ITrackData>>(x => x.Count == 3));
 
         }
 
         [Test]
         public void ThreeTracksInList_ThirdTagCorrect()
         {
-           _fakeTransponderDataEventArgs.TransponderData.Add("JAS002;12345;67890;12000;20151014123456789");
-           _fakeTransponderDataEventArgs.TransponderData.Add("JAS003;12345;67890;12000;20151014123456789");
+           _fakeTransponderDataEventArgs.TransponderData.Add("JAS002;12345;67890;12000;2016010110090901");
+           _fakeTransponderDataEventArgs.TransponderData.Add("JAS003;12345;67890;12000;2016010110090901");
             RaiseFakeEvent();
-            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[2].Tag == "TRK003"));
+            _filtering.Received().ValidateTracks(Arg.Is<List<ITrackData>>(x => x[2].Tag == "JAS003"));
 
 
         }
-
-
-
     }
 }
