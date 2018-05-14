@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ATM.Data;
 using ATM.Interfaces;
 using NSubstitute;
+using NSubstitute.Core;
 using NUnit.Framework;
 
 namespace ATM.Test.Unit
@@ -19,11 +20,16 @@ namespace ATM.Test.Unit
 
         private List<ITrackData>_trackData;                      //List holds trackdataobjects
         //private ITrackUpdate _uut;
+        private ITrackRendition _trackRendition;
+        private IProximityDetection _proximityDetection;
 
         [SetUp]
 
         public void SetUp()
         {
+            _trackRendition = Substitute.For<ITrackRendition>();
+            _proximityDetection = Substitute.For<IProximityDetection>();
+
             _trackData = new List<ITrackData>();                //initial
             //_uut=new TrackUpdate(_trackData);
 
@@ -44,7 +50,7 @@ namespace ATM.Test.Unit
             _trackData.Add(_track1);
             _trackData.Add(_track2);
 
-            uut.Update(_trackData);                     //new list
+            uut.Update(_trackData,_trackRendition,_proximityDetection);                     //new list
             Assert.That(_trackData[0].TimeStamp, Is.EqualTo(uut.oldList[0].TimeStamp)); //New list is equal to oldList
         }
 
@@ -56,7 +62,7 @@ namespace ATM.Test.Unit
             _trackData.Add(_track1);
             _trackData.Add(_track2);
 
-            uut.Update(_trackData);                    
+            uut.Update(_trackData, _trackRendition, _proximityDetection);                    
             Assert.AreNotEqual(_trackData[1].TimeStamp, uut.oldList[0].TimeStamp);
         }
 
@@ -68,7 +74,7 @@ namespace ATM.Test.Unit
             _trackData.Add(_track1);
             _trackData.Add(_track2);
 
-            uut.Update(_trackData);                     //new list
+            uut.Update(_trackData, _trackRendition, _proximityDetection);                     //new list
             Assert.That(_trackData[0].Velocity, Is.EqualTo(uut.oldList[0].Velocity));
         }
 
@@ -85,7 +91,7 @@ namespace ATM.Test.Unit
 
             _trackData.Add(_track1);
 
-            uut.Update(_trackData);         //new list SHN63 og old list SHN63
+            uut.Update(_trackData, _trackRendition, _proximityDetection);         //new list SHN63 og old list SHN63
 
            _trackData.Clear();
 
@@ -98,7 +104,7 @@ namespace ATM.Test.Unit
 
             _trackData.Add(_track2);
             var vel = new TrackUpdate().CalVelocity(_track1, _track2);   
-            uut.Update(_trackData);
+            uut.Update(_trackData, _trackRendition, _proximityDetection);
             
             Assert.AreNotEqual(vel, uut.oldList[0].Velocity);
         }
@@ -115,7 +121,7 @@ namespace ATM.Test.Unit
 
             _trackData.Add(_track1);
 
-            uut.Update(_trackData);         //new list SHN63 og old list SHN63
+            uut.Update(_trackData,_trackRendition, _proximityDetection);         //new list SHN63 og old list SHN63
 
             _trackData.Clear();
 
@@ -128,7 +134,7 @@ namespace ATM.Test.Unit
 
             _trackData.Add(_track2);
             var cor = new TrackUpdate().CalCourse(_track1, _track2);
-            uut.Update(_trackData);
+            uut.Update(_trackData, _trackRendition, _proximityDetection);
 
             Assert.AreNotEqual(cor, uut.oldList[0].Course);
         }
@@ -141,7 +147,7 @@ namespace ATM.Test.Unit
             _trackData.Add(_track1);
             _trackData.Add(_track2);
 
-            uut.Update(_trackData);
+            uut.Update(_trackData, _trackRendition, _proximityDetection);
             Assert.That(_trackData[0].Course, Is.EqualTo(uut.oldList[0].Velocity));
         }
 
@@ -150,6 +156,7 @@ namespace ATM.Test.Unit
         [TestCase(50000, 50100,50000,50100,141)]
         [TestCase(85000, 60000, 90000, 60100, 38974)]
         [TestCase(50000, 50000, 50100, 50100, 0)]                    //No change in velocity
+        [TestCase(50000, 90000, 50100, 90000, 56497)]
         public void CalVelocity_CalculateTrack1andTrack2_ReturnsVelocity(int x1, int x2, int y1, int y2, int result) //WORKS
         {
             var uut = new TrackUpdate();
@@ -171,6 +178,7 @@ namespace ATM.Test.Unit
         [TestCase(20000, 10000, 20000, 10000, 225)]
         [TestCase(20000, 20000, 10000, 10000, 180)]
         [TestCase(50000, 87000, 90000, 50000, 137)]
+        [TestCase(50000, 87000, 10000, 50000, 42)]
 
         public void CalCourse_CalculateTrack1andTrack2_Returns(int x1, int x2, int y1, int y2, int result)
         {
