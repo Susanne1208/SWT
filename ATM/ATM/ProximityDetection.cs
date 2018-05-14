@@ -17,6 +17,12 @@ namespace ATM
 
         //vertical seperation less than 300 meters
         int VerticalSeperation = 300;
+        private IEventRendition _eventRendition;
+
+        public ProximityDetection(IEventRendition eventRendition)
+        {
+            _eventRendition = eventRendition;
+        }
 
         //public void CheckForSepeation(TrackData track1, TrackData track2)
         //{

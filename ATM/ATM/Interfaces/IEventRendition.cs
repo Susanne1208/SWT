@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATM
 {
-    interface IEventRendition
+    public interface IEventRendition
     {
         //void LogToFile(SeperationData seperationData);
         //void PrintEvent(SeperationData seperationData);
