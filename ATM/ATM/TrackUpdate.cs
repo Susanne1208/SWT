@@ -11,11 +11,12 @@ namespace ATM
 {
    public class TrackUpdate : ITrackUpdate
     {
-        public List<ITrackData> oldList { get; set; }                      
+        public List<ITrackData> oldList { get; set; }
         //public List<IFiltering> newList { get; }
+        //private readonly ITrackRendition _trackRendition;
+        //private readonly IProximityDetection _proximityDetection;
 
-
-        public void Update(List<ITrackData> newList)
+        public void Update(List<ITrackData> newList, ITrackRendition trackRendition, IProximityDetection proximityDetection)
         {
             if (oldList == null)                      //Entrypoint
             {
@@ -47,8 +48,9 @@ namespace ATM
                 //}
             }
             
-            //KALD EMMA OG SUSANNES FUNKTIONER
-            //return oldList;
+            trackRendition.Print(newList);
+            //proximityDetection.IsTracksInConflict();
+            
         }
 
         public int CalVelocity(ITrackData track1, ITrackData track2)

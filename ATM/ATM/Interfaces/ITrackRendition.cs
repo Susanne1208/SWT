@@ -9,6 +9,6 @@ namespace ATM.Interfaces
 {
     public interface ITrackRendition
     {
-        void Print(List<TrackData> trackDataList);
+        void Print(List<ITrackData> trackDataList);
     }
 }
