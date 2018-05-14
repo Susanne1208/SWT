@@ -27,7 +27,7 @@ namespace ATM.Test.Unit
             _filtering = Substitute.For<IFiltering>(); 
             _uut = new Parsing(_receiver, _filtering);
             _fakeTransponderDataEventArgs = new RawTransponderDataEventArgs(new List<string>()
-                { "JAS001;12345;67890;12000;2016010110090901" });
+                { "JAS001;12345;67890;12000;20160101100909111" });
 
         }
 
@@ -124,7 +124,7 @@ namespace ATM.Test.Unit
         public void OneTrackInList_TimeStampMsCorrect()
         {
             RaiseFakeEvent();
-            _filtering.Received().ValidateTracks(Arg.Is<List<ITrackData>>(x => x[0].TimeStamp.Millisecond == 10));
+            _filtering.Received().ValidateTracks(Arg.Is<List<ITrackData>>(x => x[0].TimeStamp.Millisecond == 111));
         }
 
         [Test]
