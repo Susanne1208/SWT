@@ -14,7 +14,7 @@ namespace ATM
         public int _minAltitude { get; set; }
         public int _maxAltitude { get; set; }
         
-        public Filtering(ITrackUpdate trackUpdate)
+        public Filtering()
         {
             _minXCoordinate = 10000;
             _maxXCoordinate = 90000;
@@ -22,24 +22,25 @@ namespace ATM
             _maxYCoordinate = 90000;
             _minAltitude = 500;
             _maxAltitude = 20000;
-            _trackUpdate = trackUpdate;
+            _trackUpdate = new TrackUpdate();
         }
 
-        public Filtering(int minXCoordinate, int maxXCoordinate, int minYCoordinate, 
-            int maxYCoordinate, int minAltitude, int maxAltitude, TrackUpdate trackUpdate)
-        {
-            _minXCoordinate = minXCoordinate;
-            _maxXCoordinate = maxXCoordinate;
-            _minYCoordinate = minYCoordinate;
-            _maxYCoordinate = maxYCoordinate;
-            _minAltitude = minAltitude;
-            _maxAltitude = maxAltitude;
-            _trackUpdate = trackUpdate;
-        }
+        //Kan tilføjes, hvis det overvågede område skal ændres i størrelsen. 
+        //public Filtering(int minXCoordinate, int maxXCoordinate, int minYCoordinate, 
+        //    int maxYCoordinate, int minAltitude, int maxAltitude, ITrackUpdate trackUpdate)
+        //{
+        //    _minXCoordinate = minXCoordinate;
+        //    _maxXCoordinate = maxXCoordinate;
+        //    _minYCoordinate = minYCoordinate;
+        //    _maxYCoordinate = maxYCoordinate;
+        //    _minAltitude = minAltitude;
+        //    _maxAltitude = maxAltitude;
+        //    _trackUpdate = trackUpdate;
+        //}
 
-        public void ValidateTracks(List<TrackData> trackData)
+        public void ValidateTracks(List<ITrackData> trackData)
         {
-            List<TrackData> newTracks = new List<TrackData>();
+            List<ITrackData> newTracks = new List<ITrackData>();
 
             foreach (var track in trackData)
             {

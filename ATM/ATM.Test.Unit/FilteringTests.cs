@@ -17,15 +17,15 @@ namespace ATM.Test.Unit
     {
         private ITrackUpdate _trackUpdate;
         private Filtering _uut;
-        private TrackData _fakeTrackDataValid;
-        private TrackData _fakeTrackDataInvalid;
-        private List<TrackData> _fakeTrackDataList;
+        private ITrackData _fakeTrackDataValid;
+        private ITrackData _fakeTrackDataInvalid;
+        private List<ITrackData> _fakeTrackDataList;
 
 
         [SetUp]
         public void Setup()
         {
-            _fakeTrackDataList = new List<TrackData>();
+            _fakeTrackDataList = new List<ITrackData>();
             _trackUpdate = Substitute.For<ITrackUpdate>();
             _uut = new Filtering(_trackUpdate);
             _fakeTrackDataValid = new TrackData
@@ -50,7 +50,8 @@ namespace ATM.Test.Unit
             
             _uut.ValidateTracks(_fakeTrackDataList);
 
-            _trackUpdate.Received().Update(Arg.Is(List<TrackData>), l => l.Length()==1);
+           
+            _trackUpdate.Received().Update(Arg.Is<List<ITrackData>>(x => x.Count == 1));
         }
         [Test]
         public void ValidateTracks_TracksNotInArea_IsCorrect()
@@ -58,8 +59,8 @@ namespace ATM.Test.Unit
             _fakeTrackDataList.Add(_fakeTrackDataInvalid);
         
             _uut.ValidateTracks(_fakeTrackDataList);
-            
-            _trackUpdate.Received().
+
+            _trackUpdate.Received().Update(Arg.Is<List<ITrackData>>(x => x.Count == 0));
         }
 
     }

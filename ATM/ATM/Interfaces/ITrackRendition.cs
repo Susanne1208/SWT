@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ATM.Data;
 
-namespace ATM
+namespace ATM.Interfaces
 {
-    interface ITrackRendition
+    public interface ITrackRendition
     {
         void Print(List<TrackData> trackDataList);
     }
