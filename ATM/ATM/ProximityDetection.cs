@@ -14,7 +14,8 @@ namespace ATM
         private int HorizontalSeperation = 5000; //Horizontal seperation less than 5000 meters
         private int VerticalSeperation = 300; //vertical seperation less than 300 meters
 
-        private readonly IEventRendition _eventRendition;
+        //private readonly IEventRendition _eventRendition;
+        private IEventRendition _eventRendition;
 
 
         public ProximityDetection(IEventRendition eventRendition)
@@ -51,6 +52,9 @@ namespace ATM
                         //Kan ikke kalde funktioner.... 
                         //_eventRendition.LogToFile();
                         //_eventRendition.PrintEvent();
+
+                        //the time og the event needs to be logged to files or application
+                        //track1.TimeStamp = DateTime.Now;
                         
                     }
                 }
