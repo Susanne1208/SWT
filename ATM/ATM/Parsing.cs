@@ -44,7 +44,7 @@ namespace ATM
         public void Data(object o, RawTransponderDataEventArgs args)
         {
 
-            List<TrackData> trackList = new List<TrackData>();
+            List<ITrackData> trackList = new List<ITrackData>();
             trackList.Clear();
 
             foreach (var data in args.TransponderData)
