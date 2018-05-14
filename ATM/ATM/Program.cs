@@ -13,9 +13,13 @@ namespace ATM
         static void Main(string[] args)
         {
             ITransponderReceiver transponderDataReceiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
-            ITrackUpdate trackUpdate = new TrackUpdate();
-            IFiltering filtering = new Filtering(trackUpdate);
 
+            IEventRendition eventRendition = new EventRendition();
+            ITrackRendition trackRendition = new TrackRendition();
+            IProximityDetection proximityDetection = new ProximityDetection(eventRendition, trackRendition);
+            ITrackUpdate trackUpdate = new TrackUpdate(proximityDetection);
+            IFiltering filtering = new Filtering(trackUpdate);
+            
             var decoder = new Parsing(transponderDataReceiver, filtering);
             System.Console.ReadLine();
         }

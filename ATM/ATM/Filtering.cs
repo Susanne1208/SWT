@@ -14,7 +14,7 @@ namespace ATM
         public int _minAltitude { get; set; }
         public int _maxAltitude { get; set; }
         
-        public Filtering()
+        public Filtering(ITrackUpdate trackUpdate)
         {
             _minXCoordinate = 10000;
             _maxXCoordinate = 90000;
@@ -22,7 +22,7 @@ namespace ATM
             _maxYCoordinate = 90000;
             _minAltitude = 500;
             _maxAltitude = 20000;
-            _trackUpdate = new TrackUpdate();
+            _trackUpdate = trackUpdate;
         }
 
         //Kan tilføjes, hvis det overvågede område skal ændres i størrelsen. 
