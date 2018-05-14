@@ -66,9 +66,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventRenditionTests.cs" />
     <Compile Include="FilteringTests.cs" />
     <Compile Include="ParsingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProximityDetectionTest.cs" />
+    <Compile Include="TrackRenditionTests.cs" />
     <Compile Include="TrackUpdateTests.cs" />
   </ItemGroup>
   <ItemGroup>

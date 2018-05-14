@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using ATM.Data;
 
-namespace ATM
+namespace ATM.Interfaces
 {
     public interface IFiltering
     {
@@ -15,6 +12,6 @@ namespace ATM
         int _minAltitude { get; set; }
         int _maxAltitude { get; set; }
 
-        void ValidateTracks(List<TrackData>);
+        void ValidateTracks(List<TrackData> trackData);
     }
 }

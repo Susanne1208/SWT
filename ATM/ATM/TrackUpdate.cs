@@ -4,19 +4,22 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using ATM.Data;
 using ATM.Interfaces;
 
 namespace ATM
 {
    public class TrackUpdate : ITrackUpdate
     {
-        public List<IFiltering> oldList { get; set; }                      
+        public List<ITrackData> oldList { get; set; }                      
         //public List<IFiltering> newList { get; }
-        public List<IFiltering> Update(List<IFiltering> newList) //From Filtering
+
+
+        public List<ITrackData> Update(List<ITrackData> newList)
         {
             if (oldList == null)                      //Entrypoint
             {
-                oldList = new List<IFiltering>();
+                oldList = new List<ITrackData>();
 
                 foreach (var track in newList)
                 {
@@ -28,12 +31,12 @@ namespace ATM
                 foreach (var newTrack in newList)
                 {
 
-                    for (int i = 0; i > oldList.Count; i++)
+                    foreach (var oldTrack in oldList)
                     {
-                        if (newTrack.Tag == oldList[i].Tag)
+                        if (newTrack.Tag == oldTrack.Tag)
                         {
-                            CalVelocity(newTrack, oldList[i], i); //i fortæller hvor oldtrack befinder sig 
-                            CalCourse(newTrack, oldList[i], i);
+                            CalVelocity(newTrack, oldTrack); //i fortæller hvor oldtrack befinder sig 
+                            CalCourse(newTrack, oldTrack);
                         }
                     }
                 }
@@ -45,11 +48,9 @@ namespace ATM
             }
 
             return oldList;
-
         }
 
-
-        public void CalVelocity(IFiltering track1, IFiltering track2, int index)
+        public int CalVelocity(ITrackData track1, ITrackData track2)
         {
 
             // calculate velocity
@@ -64,14 +65,12 @@ namespace ATM
             //Distance between the 2 tracks
             double distance = Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
 
-            double time = track2.Timestamp.Subtract(track1.Timestamp).TotalSeconds;
+            double time = track2.TimeStamp.Subtract(track1.TimeStamp).TotalSeconds;
 
-            oldList[index].Velocity = distance / time;  //Updating speed
+            return (int)distance /(int) time;  //Updating speed
         }
 
-
-
-        public void CalCourse(IFiltering track1, IFiltering track2, int index)
+        public double CalCourse(ITrackData track1, ITrackData track2)
         {
             double deltaX = track2.X - track1.X;
             double deltaY = track2.Y - track1.Y;
@@ -97,12 +96,11 @@ namespace ATM
                 }
             }
 
-           oldList[index].Course = Degree;
-
+            return Degree;
         }
 
 
-       
+
     }
 
 

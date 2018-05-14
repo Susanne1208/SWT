@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ATM.Interfaces;
 
 namespace ATM.Data
 {
-    public class TrackData
+    public class TrackData:ITrackData
     {
 
         public string Tag { get; set; }

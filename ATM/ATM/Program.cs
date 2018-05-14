@@ -13,11 +13,11 @@ namespace ATM
         static void Main(string[] args)
         {
             ITransponderReceiver transponderDataReceiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
-            ITrackDataReceiver trackReceiver = new TrackDataReceiver();
+            ITrackUpdate trackUpdate = new TrackUpdate();
+            IFiltering filtering = new Filtering(trackUpdate);
 
-           var decoder = new Track(transponderDataReceiver, trackReceiver);
-           System.Console.ReadLine();
-
+            var decoder = new Parsing(transponderDataReceiver, filtering);
+            System.Console.ReadLine();
         }
     }
 }
