@@ -20,12 +20,15 @@ namespace ATM.Test.Unit
         private ITrackData _track1, _track2, _track3, _track4;
 
         private IEventRendition _eventRendition;
+        private ProximityDetectionData _proximityDetectionData;
 
+        //Horizontal seperation less than 5000 meters
+        //vertical seperation less than 300 meters
 
         [SetUp]
         public void SetUp()
         {
-            _uut = new ProximityDetection(_eventRendition);
+            _uut = new ProximityDetection(_eventRendition, _proximityDetectionData);
 
             _trackDataList = new List<ITrackData>();
             _track1 = new TrackData();
@@ -38,59 +41,136 @@ namespace ATM.Test.Unit
         }
 
 
-        //Horizontal seperation less than 5000 meters
-        //vertical seperation less than 300 meters
+        [TestCase(11111, 22222, 33333, 4444, 8000, 8100, true)] //Horizontal conflict
+        [TestCase(11111, 22222, 1122, 2233, 8000, 8700, true)] // Vertical conflict
+        public void CheckProximityDetection_EventRendtion_LogTofileIsCalled(int x1, int y1, int x2, int y2, int alt1, int alt2)
+        {
 
-        //[TestCase(11111, 22222, 33333, 4444, 8000, 8100, true)] //Horizontal conflict
-        //[TestCase(11111, 22222, 1122, 2233, 8000, 8700, true)] // Vertical conflict
-        //public void EventRendition_IsCalled_True()
+            //_uut.CheckProximityDetection(_trackDataList);
+            //var uut = new ProximityDetection(_eventRendition);
+
+            //LogToFile is called when tracks are colliding
+
+            _track1.X = x1;
+            _track1.Y = y1;
+            _track1.Altitude = alt1;
+
+            _track2.X = x2;
+            _track2.Y = y2;
+            _track2.Altitude = alt2;
+
+            _trackDataList.Add(_track1);
+            _trackDataList.Add(_track2);
+
+
+            _uut.CheckProximityDetection(_trackDataList);
+
+            _eventRendition.Received().LogToFile();
+        }
+
+
+        [TestCase(11111, 22222, 33333, 44444, 8000, 6000)] //Horizontal NO Conflict
+        [TestCase(11111, 22222, 40000, 50000, 8000, 7000)] // Vertical NO conflict
+        public void CheckProximityDetection_EventRendtion_LogTofileIsNotCalled(int x1, int y1, int x2, int y2, int alt1, int alt2)
+        {
+            //LogToFile is NOT called when tracks are not colliding
+            _track1.X = x1;
+            _track1.Y = y1;
+            _track1.Altitude = alt1;
+
+            _track2.X = x2;
+            _track2.Y = y2;
+            _track2.Altitude = alt2;
+            
+            _trackDataList.Add(_track1);
+            _trackDataList.Add(_track2);
+            _uut.CheckProximityDetection(_trackDataList);
+            _eventRendition.DidNotReceive().LogToFile();
+
+        }
+
+        [TestCase(11111, 22222, 33333, 4444, 8000, 8100, true)] //Horizontal conflict
+        [TestCase(11111, 22222, 1122, 2233, 8000, 8700, true)] // Vertical conflict
+        public void CheckProximityDetection_EventRendition_PrintEventIsCalled(int x1, int y1, int x2, int y2, int alt1, int alt2)
+        {
+            //_uut.CheckProximityDetection(_trackDataList);
+            //var uut = new ProximityDetection(_eventRendition);
+
+            //PrintEvent is called when tracks are colliding
+
+            _track1.X = x1;
+            _track1.Y = y1;
+            _track1.Altitude = alt1;
+
+            _track2.X = x2;
+            _track2.Y = y2;
+            _track2.Altitude = alt2;
+
+            _trackDataList.Add(_track1);
+            _trackDataList.Add(_track2);
+
+
+            _uut.CheckProximityDetection(_trackDataList);
+
+            _eventRendition.Received().PrintEvent();
+        }
+
+
+        [TestCase(11111, 22222, 33333, 44444, 8000, 6000)] //Horizontal NO Conflict
+        [TestCase(11111, 22222, 40000, 50000, 8000, 7000)] // Vertical NO conflict
+        public void CheckProximityDetection_EventRendtion_PrintEventIsNotCalled(int x1, int y1, int x2, int y2, int alt1, int alt2)
+        {
+            //PrintEvent is NOT called when tracks are not colliding
+            _track1.X = x1;
+            _track1.Y = y1;
+            _track1.Altitude = alt1;
+
+            _track2.X = x2;
+            _track2.Y = y2;
+            _track2.Altitude = alt2;
+
+            _trackDataList.Add(_track1);
+            _trackDataList.Add(_track2);
+            _uut.CheckProximityDetection(_trackDataList);
+            _eventRendition.DidNotReceive().PrintEvent();
+
+        }
+
+        ////x1, y1, x2, y2,  alt1, alt2, result
+        //[TestCase(11111,22222,33333,4444,8000,8100, true)] //Horizontal conflict
+        //[TestCase(11111,22222,1122,2233,8000,8700, true)] // Vertical conflict
+        //public void IsTracksInConflict_returnsTrue(int x1, int y1, int x2, int y2, int alt1, int alt2, bool result)
         //{
-        //    _uut.CheckProximityDetection(_trackDataList);
-        //    //var uut = new ProximityDetection(_eventRendition);
+        //    //track1 and track 2 is conflicting because of horizontal and vertical distance
+        //    _track1.X = x1;
+        //    _track1.Y = y1;
+        //    _track1.Altitude = alt1;
+
+        //    _track2.X = x2;
+        //    _track2.Y = y2;
+        //    _track2.Altitude = alt2;
+
+        //    //Assert.AreEqual();
+        //    //Assert.AreEqual(result, _uut.IsTracksInConflict(_track1,_track2));
 
 
-        //    _uut.CheckProximityDetection(_trackDataList);
-
-        //    _eventRendition.Received().LogToFile();
         //}
 
+        ////x1, y1, x2, y2,  alt1, alt2, result
+        //[TestCase(11111, 22222, 33333, 44444, 8000, 6000, false)] //Horizontal
+        //[TestCase(11111, 22222, 40000, 50000, 8000, 7000, false)] // Vertical
+        //public void IsTracksInConflict_returnsFalse(int x1, int y1, int x2, int y2, int alt1, int alt2, bool result)
+        //{
+        //    //track1 and track 2 is NOT conflicting because of distance
+        //    _track1.X = x1;
+        //    _track1.Y = y1;
+        //    _track1.Altitude = alt1;
 
-        //x1, y1, x2, y2,  alt1, alt2, result
-        [TestCase(11111,22222,33333,4444,8000,8100, true)] //Horizontal conflict
-        [TestCase(11111,22222,1122,2233,8000,8700, true)] // Vertical conflict
-        public void IsTracksInConflict_returnsTrue(int x1, int y1, int x2, int y2, int alt1, int alt2, bool result)
-        {
-            //track1 and track 2 is conflicting because of horizontal and vertical distance
-            _track1.X = x1;
-            _track1.Y = y1;
-            _track1.Altitude = alt1;
+        //    _track2.X = x2;
+        //    _track2.Y = y2;
+        //    _track2.Altitude = alt2;
 
-            _track2.X = x2;
-            _track2.Y = y2;
-            _track2.Altitude = alt2;
-
-            //Assert.AreEqual();
-            //Assert.AreEqual(result, _uut.IsTracksInConflict(_track1,_track2));
-
-
-        }
-
-        //x1, y1, x2, y2,  alt1, alt2, result
-        [TestCase(11111, 22222, 33333, 44444, 8000, 6000, false)] //Horizontal
-        [TestCase(11111, 22222, 40000, 50000, 8000, 7000, false)] // Vertical
-        [Test]
-        public void IsTracksInConflict_returnsFalse(int x1, int y1, int x2, int y2, int alt1, int alt2, bool result)
-        {
-            //track1 and track 2 is NOT conflicting because of distance
-            _track1.X = x1;
-            _track1.Y = y1;
-            _track1.Altitude = alt1;
-
-            _track2.X = x2;
-            _track2.Y = y2;
-            _track2.Altitude = alt2;
-
-            //Assert.AreEqual(result, _uut.IsTracksInConflict(_track1, _track2));
-        }
+        //    //Assert.AreEqual(result, _uut.IsTracksInConflict(_track1, _track2));
+        //}
     }
 }
