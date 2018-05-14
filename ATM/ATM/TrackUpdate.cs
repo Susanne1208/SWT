@@ -14,48 +14,54 @@ namespace ATM
         public List<ITrackData> oldList { get; set; }
         private ITrackRendition _trackRendition;
         private IProximityDetection _proximityDetection;
-
+        private double x1 { get; set; }
+        private double x2 { get; set; }
+        private double y1 { get; set; }
+        private double y2 { get; set; }
+        public double timespan { get; set; }
         public TrackUpdate(ITrackRendition trackRendition, IProximityDetection proximityDetection)
         {
             _trackRendition = trackRendition;
             _proximityDetection = proximityDetection;
+            oldList = new List<ITrackData>();
 
         }
         //public List<IFiltering> newList { get; }
         //private readonly ITrackRendition _trackRendition;
         //private readonly IProximityDetection _proximityDetection;
 
+        //public TrackUpdate()
+        //{
+        //    oldList= new List<ITrackData>();
+        //}
+
         public void Update(List<ITrackData> newList)
         {
-            if (oldList == null)                      //Entrypoint
+            foreach (var newTrack in newList)
             {
-                oldList = new List<ITrackData>();
+                if (!oldList.Any())
+                    break;
 
-                foreach (var track in newList)
+                foreach (var oldTrack in oldList)
                 {
-                    oldList.Add(track);               //now OldList is equal to Newlist
-                }
-            }
-            else
-            {
-                foreach (var newTrack in newList)
-                {
-
-                    foreach (var oldTrack in oldList)
+                    if (newTrack.Tag == oldTrack.Tag)
                     {
-                        if (newTrack.Tag == oldTrack.Tag)
-                        {
-                            CalVelocity(newTrack, oldTrack); //i fortæller hvor oldtrack befinder sig 
-                            CalCourse(newTrack, oldTrack);
-                        }
+                        newTrack.Velocity = CalVelocity(newTrack, oldTrack);
+                        newTrack.Course = CalCourse(newTrack, oldTrack);
                     }
-                }
 
-                //foreach (var newTrack in newList)
-                //{
-                //    oldList.Add(newTrack);
-                //}
+
+                }
             }
+
+            oldList.Clear();
+
+            foreach (var trackData in newList)
+            {
+                oldList.Add(trackData);
+            }
+            
+      
             
             _trackRendition.Print(newList);
             _proximityDetection.CheckProximityDetection(newList);
@@ -69,18 +75,62 @@ namespace ATM
 
 
             //Coordinates 
-            int x1 = track1.X;
-            int x2 = track2.X;
-            int y1 = track1.Y;
-            int y2 = track2.Y;
+            //int x1 = track1.X;
+            //int x2 = track2.X;
+            //int y1 = track1.Y;
+            //int y2 = track2.Y;
 
-            //Distance between the 2 tracks
-            double distance = Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
-            
+            ////Distance between the 2 tracks
+            //double distance = Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
+            //if (distance<0)
+            //{
+            //    distance = distance * (-1);
+            //}
 
-            double time = track2.TimeStamp.Subtract(track1.TimeStamp).TotalSeconds;
+            // //double time = track2.TimeStamp.Subtract(track1.TimeStamp).TotalSeconds;
 
-            return (int)distance /(int) time;  //Updating speed
+
+
+            //TimeSpan time = track2.TimeStamp - track1.TimeStamp;
+            //timespan = (time.TotalSeconds);
+            TimeSpan time = track2.TimeStamp - track1.TimeStamp;
+            timespan = (double)time.TotalSeconds;
+
+            double deltaX = 0;
+            double deltaY = 0;
+            double velocity = 0;
+
+            if (track1.X > track2.X)
+            {
+                deltaX = track1.X - track2.X;
+            }
+            else
+            {
+                deltaX = track2.X - track1.X;
+            }
+
+            if (track1.Y > track2.Y)
+            {
+                deltaY = track1.Y - track2.Y;
+            }
+            else
+            {
+                deltaY = track2.Y - track1.Y;
+            }
+
+            double distance = Math.Sqrt(Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2));
+
+            if (timespan < 0)
+            {
+                timespan = timespan * -1;
+                velocity = distance / timespan;
+            }
+            else if (timespan > 0)
+            { velocity = distance / timespan; }
+
+            return (int)velocity;
+
+            //return (int)distance /(int)timespan;  //Updating speed
         }
 
         public int CalCourse(ITrackData track1, ITrackData track2)

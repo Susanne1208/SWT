@@ -93,9 +93,9 @@ namespace ATM.Test.Unit
 
             uut.Update(_trackData);         //new list SHN63 og old list SHN63
 
-           _trackData.Clear();
+          // _trackData.Clear();
 
-            _track2.TimeStamp.Returns(new DateTime(2018, 05, 13, 10, 50, 31));
+            _track2.TimeStamp.Returns(new DateTime(2018, 05, 13, 10, 50, 36));
             _track2.X.Returns(65000);
             _track2.Y.Returns(71000);
             _track2.Tag.Returns("SHN63");
