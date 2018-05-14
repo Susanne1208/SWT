@@ -29,7 +29,7 @@ namespace ATM.Test.Unit
             _trackRendition = Substitute.For<ITrackRendition>(); 
             _uut = new Parsing(_receiver, _filtering);
             _fakeTransponderDataEventArgs = new RawTransponderDataEventArgs(new List<string>()
-                { "JAS002;12345;67890;12000;20170101123456789" });
+                { "JAS001;12345;67890;12000;20170101123456789" });
 
         }
 
@@ -51,7 +51,7 @@ namespace ATM.Test.Unit
         public void OneTrackInList_TagCorrect()
         {
             RaiseFakeEvent();
-            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].Tag == "JAS002"));
+            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].Tag == "JAS001"));
         }
 
         [Test]
@@ -130,15 +130,24 @@ namespace ATM.Test.Unit
         [Test]
         public void ThreeTracksInList_CountCorrect()
         {
+           _fakeTransponderDataEventArgs.TransponderData.Add("JAS002;12345;67890;12000;20151014123456789");
+           _fakeTransponderDataEventArgs.TransponderData.Add("JAS003;12345;67890;12000;20151014123456789");
+           RaiseFakeEvent();
+            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x.Count == 3));
 
         }
 
         [Test]
         public void ThreeTracksInList_ThirdTagCorrect()
         {
+           _fakeTransponderDataEventArgs.TransponderData.Add("JAS002;12345;67890;12000;20151014123456789");
+           _fakeTransponderDataEventArgs.TransponderData.Add("JAS003;12345;67890;12000;20151014123456789");
+            RaiseFakeEvent();
+            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[2].Tag == "TRK003"));
+
 
         }
-          
+
 
 
     }
