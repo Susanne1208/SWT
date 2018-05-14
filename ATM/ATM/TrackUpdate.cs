@@ -12,11 +12,20 @@ namespace ATM
    public class TrackUpdate : ITrackUpdate
     {
         public List<ITrackData> oldList { get; set; }
+        private ITrackRendition _trackRendition;
+        private IProximityDetection _proximityDetection;
+
+        public TrackUpdate(ITrackRendition trackRendition, IProximityDetection proximityDetection)
+        {
+            _trackRendition = trackRendition;
+            _proximityDetection = proximityDetection;
+
+        }
         //public List<IFiltering> newList { get; }
         //private readonly ITrackRendition _trackRendition;
         //private readonly IProximityDetection _proximityDetection;
 
-        public void Update(List<ITrackData> newList, ITrackRendition trackRendition, IProximityDetection proximityDetection)
+        public void Update(List<ITrackData> newList)
         {
             if (oldList == null)                      //Entrypoint
             {
@@ -48,8 +57,8 @@ namespace ATM
                 //}
             }
             
-            trackRendition.Print(newList);
-            //proximityDetection.IsTracksInConflict();
+            _trackRendition.Print(newList);
+            //_proximityDetection.IsTracksInConflict();
             
         }
 
