@@ -9,7 +9,7 @@ using TransponderReceiver;
 
 namespace ATM
 {
-    class Parsing : IParsing
+    public class Parsing : IParsing
     {
         private readonly IFiltering _filtering;
         private List<TrackData> _trackList;

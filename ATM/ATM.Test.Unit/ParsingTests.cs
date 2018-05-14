@@ -13,10 +13,11 @@ namespace ATM.Test.Unit
 
     class ParsingTests
     {
-        private Track _uut; 
+        private Parsing _uut; 
         private ITransponderReceiver _receiver;
         private RawTransponderDataEventArgs _fakeTransponderDataEventArgs;
-        private ITrackDataReceiver _trackDataReceiver;
+        private ITrackRendition _trackRendition;
+        private IFiltering _filtering;
 
 
 
@@ -24,8 +25,9 @@ namespace ATM.Test.Unit
         public void Setup()
         {
             _receiver = Substitute.For<ITransponderReceiver>();
-            _trackDataReceiver = Substitute.For<ITrackDataReceiver>(); 
-            _uut = new Track(_receiver, _trackDataReceiver);
+            _filtering = Substitute.For<IFiltering>();
+            _trackRendition = Substitute.For<ITrackRendition>(); 
+            _uut = new Parsing(_receiver, _filtering);
             _fakeTransponderDataEventArgs = new RawTransponderDataEventArgs(new List<string>()
                 { "JAS002;12345;67890;12000;20170101123456789" });
 
@@ -40,7 +42,7 @@ namespace ATM.Test.Unit
         public void OneTrackInList_CountCorrect()
         {
             RaiseFakeEvent();
-            _trackDataReceiver.Received().ReceiveTracks(Arg.Is<List<TrackData>>(x => x.Count == 1));
+            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x.Count == 1));
 
         }
 
@@ -49,14 +51,14 @@ namespace ATM.Test.Unit
         public void OneTrackInList_TagCorrect()
         {
             RaiseFakeEvent();
-            _trackDataReceiver.Received().ReceiveTracks(Arg.Is<List<TrackData>>(x => x[0].Tag == "JAS002"));
+            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].Tag == "JAS002"));
         }
 
         [Test]
         public void OneTrackInList_XCorrect()
         {
             RaiseFakeEvent();
-            _trackDataReceiver.Received().ReceiveTracks(Arg.Is<List<TrackData>>(x => x[0].X == 12345));
+            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].X == 12345));
         }
 
 
@@ -64,14 +66,14 @@ namespace ATM.Test.Unit
         public void OneTrackInList_YCorrect()
         {
             RaiseFakeEvent();
-            _trackDataReceiver.Received().ReceiveTracks(Arg.Is<List<TrackData>>(x => x[0].Y == 67890));
+            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].Y == 67890));
         }
 
         [Test]
         public void OneTrackInList_AltitudeCorrect()
         {
             RaiseFakeEvent();
-            _trackDataReceiver.Received().ReceiveTracks(Arg.Is<List<TrackData>>(x => x[0].Altitude == 12000));
+            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].Altitude == 12000));
         }
 
 
@@ -79,7 +81,7 @@ namespace ATM.Test.Unit
         public void OneTrackInList_TimeStampYearCorrect()
         {
             RaiseFakeEvent();
-            _trackDataReceiver.Received().ReceiveTracks(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Year == 2017));
+            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Year == 2017));
         }
 
 
@@ -87,27 +89,27 @@ namespace ATM.Test.Unit
         public void OneTrackInList_TimeStampMonthCorrect()
         {
             RaiseFakeEvent();
-            _trackDataReceiver.Received().ReceiveTracks(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Month == 01));
+            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Month == 01));
         }
 
         [Test]
         public void OneTrackInList_TimeStampDayCorrect()
         {
             RaiseFakeEvent();
-            _trackDataReceiver.Received().ReceiveTracks(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Day == 01));
+            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Day == 01));
         }
 
         public void OneTrackInList_TimeStampHourCorrect()
         {
             RaiseFakeEvent();
-            _trackDataReceiver.Received().ReceiveTracks(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Hour == 12));
+            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Hour == 12));
         }
 
         [Test]
         public void OneTrackInList_TimeStampMinuteCorrect()
         {
             RaiseFakeEvent();
-            _trackDataReceiver.Received().ReceiveTracks(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Minute ==34 ));
+            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Minute ==34 ));
         }
 
 
@@ -115,14 +117,14 @@ namespace ATM.Test.Unit
         public void OneTrackInList_TimeStampSecondCorrect()
         {
             RaiseFakeEvent();
-            _trackDataReceiver.Received().ReceiveTracks(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Second == 56));
+            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Second == 56));
         }
 
         [Test]
         public void OneTrackInList_TimeStampMsCorrect()
         {
             RaiseFakeEvent();
-            _trackDataReceiver.Received().ReceiveTracks(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Millisecond == 789));
+            _trackRendition.Received().Print(Arg.Is<List<TrackData>>(x => x[0].TimeStamp.Millisecond == 789));
         }
 
         [Test]

@@ -7,7 +7,7 @@ using ATM.Data;
 
 namespace ATM
 {
-    interface ITrackRendition
+    public interface ITrackRendition
     {
         void Print(List<TrackData> trackDataList);
     }
