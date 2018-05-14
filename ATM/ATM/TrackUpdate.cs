@@ -14,10 +14,10 @@ namespace ATM
         public List<ITrackData> oldList { get; set; }
         private ITrackRendition _trackRendition;
         private IProximityDetection _proximityDetection;
-        private double x1 { get; set; }
-        private double x2 { get; set; }
-        private double y1 { get; set; }
-        private double y2 { get; set; }
+       // private double x1 { get; set; }
+        //private double x2 { get; set; }
+        //private double y1 { get; set; }
+        //private double y2 { get; set; }
         public double timespan { get; set; }
         public TrackUpdate(ITrackRendition trackRendition, IProximityDetection proximityDetection)
         {
