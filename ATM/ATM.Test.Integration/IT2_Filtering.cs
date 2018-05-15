@@ -12,7 +12,7 @@ using NSubstitute;
 namespace ATM.Test.Integration
 {
     [TestFixture]
-    class IT3_Filtering
+    class IT2_Filtering
     {
         
         private ITrackRendition _trackRendition;

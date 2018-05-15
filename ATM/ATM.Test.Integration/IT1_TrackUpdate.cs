@@ -13,7 +13,7 @@ using NUnit.Framework;
 namespace ATM.Test.Integration
 {
     [TestFixture]
-    class IT2_TrackUpdate
+    class IT1_TrackUpdate
     {
 
         private List<ITrackData> _trackData;

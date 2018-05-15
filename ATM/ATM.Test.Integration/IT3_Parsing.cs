@@ -14,7 +14,7 @@ using TransponderReceiver;
 namespace ATM.Test.Integration
 {
     [TestFixture]
-    class IT5_
+    class IT3_Parsing
     {
         private ITrackUpdate _trackUpdate;
         private ITrackRendition _trackRendition;
@@ -26,7 +26,7 @@ namespace ATM.Test.Integration
         private ITransponderReceiver _transponderReceiver;
         private IProximityDetectionData _proximityDetectionData;
         private RawTransponderDataEventArgs _dataEvent;
-
+          
 
         private ITrackData _fakeTrackData;
         private List<ITrackData> _faketrackList;
