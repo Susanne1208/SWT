@@ -16,7 +16,7 @@ namespace ATM
 
             IEventRendition eventRendition = new EventRendition();
             ITrackRendition trackRendition = new TrackRendition();
-            IProximityDetectionData proximityDetectionData = new IProximityDetectionData();
+            IProximityDetectionData proximityDetectionData = new ProximityDetectionData();
             
 
             IProximityDetection proximityDetection = new ProximityDetection(eventRendition, proximityDetectionData);

@@ -16,12 +16,12 @@ namespace ATM
 
         //private readonly IEventRendition _eventRendition;
         private readonly IEventRendition _eventRendition;
-        private readonly ProximityDetectionData _proximityDetectionData;
+        private readonly IProximityDetectionData _proximityDetectionData;
 
 
 
 
-        public ProximityDetection(IEventRendition eventRendition, ProximityDetectionData proximityDetectionData)
+        public ProximityDetection(IEventRendition eventRendition, IProximityDetectionData proximityDetectionData)
         {
             //Need to call LogToFile
             _eventRendition = eventRendition;
