@@ -5,6 +5,7 @@
 ////using System.Text;
 ////using System.Threading.Tasks;
 
+using System.Collections.Generic;
 using System.IO;
 using ATM.Interfaces;
 
@@ -12,46 +13,46 @@ namespace ATM
 {
     public class EventRendition : IEventRendition
     {
-        private readonly IProximityDetectionData _proximityDetectionData;
+        private IProximityDetectionData _proximityDetectionData;
 
-        public EventRendition(IProximityDetectionData proximityDetectionData)
-        {
-            _proximityDetectionData = proximityDetectionData;
-        }
+        //public EventRendition(List<IProximityDetectionData> proximityDetectionData)
+        //{
+           
+        //    proximityDetectionData = new List<IProximityDetectionData>();
+        //}
 
         public EventRendition()
         {
         }
 
-        public void LogToFile()
-        {
+       
 
-        //    //string path = @"C:\Temp\Logfile.txt";
-        //    //string text = "Planes in conflict: " + seperationData.TAG1 + " and " + seperationData.TAG2 +
-        //    //                  "\nTime of occurance: " + seperationData.TimeStamp;
-        //    //File.WriteAllText(path, text);
-        //    //System.Console.WriteLine("TEST);
+        public void LogToFile(List<IProximityDetectionData> proximityDetectionDatas)
+        {
+            string path = @"C:\Temp\Logfile.txt";
+
+            foreach (var proximityDetectionData in proximityDetectionDatas)
+            {
+                string text = "Planes in conflict: " + proximityDetectionData.Tag1 + " and " + proximityDetectionData.Tag2 +
+                              "\nTime of occurance: " + proximityDetectionData.Timestamp;
+
+                File.WriteAllText(path, text);
+            }
+            
         }
 
-        //public void LogToFile()
-        //{
-        //    string path = @"C:\Temp\Logfile.txt";
-        //    string text = "Planes in conflict: " + _proximityDetectionData.Tag1 + " and " + _proximityDetectionData.Tag2 +
-        //                  "\nTime of occurance: " + _proximityDetectionData.Timestamp;
-
-        //    File.WriteAllText(path, text);
-        //}
-
-        //public void PrintEvent()
-        //{
-        //    Print the collision waring to the console application
-        //    System.Console.WriteLine(seperationData);
-        //}
-
-        public void PrintEvent()
+        public void PrintEvent(List<IProximityDetectionData> proximityDetectionDatas)
         {
-            //Print the collision waring to the console application
-            System.Console.WriteLine(_proximityDetectionData);
+            //_proximityDetectionData = proximityDetectionData;
+            //Print the collision warning to the console
+           foreach (var data in proximityDetectionDatas)
+            {
+                System.Console.WriteLine(data);
+                
+            }
+            
         }
+
+       
     }
 }

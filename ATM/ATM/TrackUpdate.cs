@@ -153,10 +153,10 @@ namespace ATM
                 Degree = radian / Math.PI * 180;
 
                 Degree = 90 - Degree;
-                //if (Degree < 0)
-                //{
-                  //  Degree += 360;
-                //}
+                if (Degree < 0)
+                {
+                    Degree += 360;
+                }
             }
 
             return (int)Degree;
