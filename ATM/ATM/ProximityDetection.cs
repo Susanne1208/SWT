@@ -65,6 +65,7 @@ namespace ATM
                         //_eventRendition.LogToFile(_proximityDetectionData);
                         //_eventRendition.PrintEvent(_proximityDetectionData);
                         _proximityDetectionDatas.Add(_proximityDetectionData);
+
                         _eventRendition.PrintEvent(_proximityDetectionDatas);
                         _eventRendition.LogToFile(_proximityDetectionDatas);
 
