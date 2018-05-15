@@ -64,10 +64,12 @@ namespace ATM.Test.Unit
             _trackDataList.Add(_track1);
             _trackDataList.Add(_track2);
 
-
+            _proximityDetectionData.Tag1 = _track1.Tag;
+            _proximityDetectionData.Tag2 = _track2.Tag;
+            _proximityDetectionData.Timestamp = DateTime.Now;;
             _uut.CheckProximityDetection(_trackDataList);
 
-            _eventRendition.Received().LogToFile();
+            _eventRendition.Received().LogToFile(_proximityDetectionData);
         }
 
 

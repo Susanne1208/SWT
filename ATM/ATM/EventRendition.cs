@@ -23,7 +23,7 @@ namespace ATM
         {
         }
 
-        public void LogToFile(IProximityDetection proximityDetection)
+        public void LogToFile(IProximityDetectionData proximityDetectionData)
         {
 
         //    //string path = @"C:\Temp\Logfile.txt";
@@ -48,7 +48,7 @@ namespace ATM
         //    System.Console.WriteLine(seperationData);
         //}
 
-        public void PrintEvent(IProximityDetection proximityDetection)
+        public void PrintEvent(IProximityDetectionData proximityDetectiondata)
         {
             //Print the collision waring to the console application
             System.Console.WriteLine(_proximityDetectionData);
