@@ -10,9 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATM.Test.Integration", "ATM.Test.Integration\ATM.Test.Integration.csproj", "{7058C6E3-FBAE-46E1-A3B1-F65C53AB4377}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3A80E214-7098-450C-A4C4-9181202B6ACA}"
-	ProjectSection(SolutionItems) = preProject
-		TransponderReceiver.dll = TransponderReceiver.dll
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
