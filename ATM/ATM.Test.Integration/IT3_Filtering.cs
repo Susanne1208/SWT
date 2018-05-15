@@ -31,7 +31,7 @@ namespace ATM.Test.Integration
             _fakeParsing = Substitute.For<Parsing>();
             _trackRendition = new TrackRendition();
             _proximityDetectionData = new ProximityDetectionData();
-            _eventRendition = new EventRendition(_proximityDetectionData);
+            //_eventRendition = new EventRendition(_proximityDetectionData);
             _proximityDetection = new ProximityDetection(_eventRendition, _proximityDetectionData);
             _trackUpdate = new TrackUpdate(_trackRendition, _proximityDetection);
 
@@ -56,7 +56,7 @@ namespace ATM.Test.Integration
             _fakeTrackDataList.Add(_fakeTrackDataValid);
 
 
-            _uut.ValidateTracks(_fakeTrackDataList);
+            //_uut.ValidateTracks(_fakeTrackDataList);
 
 
             _trackUpdate.Received().Update(Arg.Is<List<ITrackData>>(x => x.Count == 1));
@@ -66,7 +66,7 @@ namespace ATM.Test.Integration
         {
             _fakeTrackDataList.Add(_fakeTrackDataInvalid);
 
-            _uut.ValidateTracks(_fakeTrackDataList);
+           // _uut.ValidateTracks(_fakeTrackDataList);
 
             _trackUpdate.Received().Update(Arg.Is<List<ITrackData>>(x => x.Count == 0));
         }
