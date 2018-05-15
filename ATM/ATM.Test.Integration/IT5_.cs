@@ -82,9 +82,89 @@ namespace ATM.Test.Integration
         {
             _faketrackList.Add(_fakeTrackData);
             RaiseFakeEvent();
+            _trackRendition.Received().Print(Arg.Is<List<ITrackData>>(data => data[0].Tag == "JAS001"));
+
+
+
+
             // RaiseFakeEvent();
-            _trackRendition.Received().Print(Arg.Is<List<ITrackData>>(data => data.Equals(_faketrackList)));
+           // _trackRendition.Received().Print(Arg.Is<List<ITrackData>>(data => data.Equals(_faketrackList)));
             
+
+        }
+
+        [Test]
+        public void OneTrackInList_TagCorrect()
+        {
+
+        }
+
+        [Test]
+        public void OneTrackInList_XCorrect()
+        {
+        }
+
+
+        [Test]
+        public void OneTrackInList_YCorrect()
+        {
+        }
+
+        [Test]
+        public void OneTrackInList_AltitudeCorrect()
+        {
+        }
+
+
+        [Test]
+        public void OneTrackInList_TimeStampYearCorrect()
+        {
+        }
+
+
+        [Test]
+        public void OneTrackInList_TimeStampMonthCorrect()
+        {
+        }
+
+        [Test]
+        public void OneTrackInList_TimeStampDayCorrect()
+        {
+        }
+
+        [Test]
+        public void OneTrackInList_TimeStampHourCorrect()
+        {
+        }
+
+        [Test]
+        public void OneTrackInList_TimeStampMinuteCorrect()
+        {
+        }
+
+
+        [Test]
+        public void OneTrackInList_TimeStampSecondCorrect()
+        {
+        }
+
+        [Test]
+        public void OneTrackInList_TimeStampMsCorrect()
+        {
+        }
+
+        [Test]
+        public void ThreeTracksInList_CountCorrect()
+        {
+            
+
+        }
+
+        [Test]
+        public void ThreeTracksInList_ThirdTagCorrect()
+        {
+           
+
 
         }
 
