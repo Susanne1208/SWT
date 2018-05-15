@@ -22,6 +22,7 @@ namespace ATM.Test.Integration
         private IProximityDetectionData _proximityDetectionData;
         private ITrackUpdate _trackUpdate;
         private ITrackData _track1;
+        private ITrackData _track2;
 
         [SetUp]
         public void SetUp()
@@ -30,14 +31,40 @@ namespace ATM.Test.Integration
             //_filtering = Substitute.For<IFiltering>();
 
             _trackRendition = new TrackRendition();
-            _eventRendition = new EventRendition();
+            _eventRendition = Substitute.For<IEventRendition>();
             _proximityDetection = new ProximityDetection(_eventRendition, _proximityDetectionData);
             //_proximityDetectionData = Substitute.For<IProximityDetectionData>();
             _trackUpdate = new TrackUpdate(_trackRendition, _proximityDetection);
             _track1 = Substitute.For<ITrackData>();
+            _track2 = Substitute.For<ITrackData>();
+            
         }
 
         [Test]
+        public void blabla()
+        {
+            var uut = new TrackUpdate(_trackRendition, _proximityDetection);
+            _track1.X.Returns(50000);
+            _track1.Tag.Returns("AB1234");
+            _track2.Tag.Returns("AB1235");
+            _track1.TimeStamp.Returns(DateTime.Today);
+            _track2.TimeStamp.Returns(DateTime.Today);
+            _track2.X.Returns(50010);
+            _track1.Y.Returns(60000);
+            _track2.Y.Returns(60100);
+            _track1.Altitude.Returns(500);
+            _track2.Altitude.Returns(520);
+
+            _trackData.Add(_track1);
+            _trackData.Add(_track2);
+            uut.Update(_trackData);
+
+            //_proximityDetection.CheckProximityDetection(_trackData);
+
+            _eventRendition.Received().PrintEvent(Arg.Is<List<IProximityDetectionData>>(data => data[0].Tag1==_track1.Tag));//LogToFile(_trackData);
+
+            
+        }
 
         public void printNewList_NewlistPrinted()
         {
