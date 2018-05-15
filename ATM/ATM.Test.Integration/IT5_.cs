@@ -24,9 +24,12 @@ namespace ATM.Test.Integration
         private IParsing _parsing;
         private IEventRendition _eventRendition;
         private ITransponderReceiver _transponderReceiver;
+        private IProximityDetectionData _proximityDetectionData;
+        private RawTransponderDataEventArgs _dataEvent;
 
-        private List<ITrackData> tracks;
-        private RawTransponderDataEventArgs _args;
+
+        private ITrackData _fakeTrackData;
+        private List<ITrackData> _faketrackList;
 
 
 
@@ -35,26 +38,56 @@ namespace ATM.Test.Integration
         [SetUp]
         public void Setup()
         {
-            _parsing = new Parsing(_transponderReceiver, _filtering);
-            _trackData = new TrackData();
 
             _transponderReceiver = Substitute.For<ITransponderReceiver>();
-            _eventRendition = Substitute.For<IEventRendition>();
-            _trackUpdate = Substitute.For<ITrackUpdate>();
             _trackRendition = Substitute.For<ITrackRendition>();
-            _filtering = Substitute.For<IFiltering>();
-            _proximityDetection = Substitute.For<IProximityDetection>(); 
+            _proximityDetectionData = new ProximityDetectionData();
+            _eventRendition = new EventRendition(_proximityDetectionData);
+            _proximityDetection = new ProximityDetection(_eventRendition, _proximityDetectionData);
+            _trackUpdate = new TrackUpdate(_trackRendition, _proximityDetection);
+            _filtering = new Filtering(_trackUpdate);
+            _parsing = new Parsing(_transponderReceiver, _filtering);
+            _trackData = new TrackData();
+            _faketrackList = new List<ITrackData>();
+            //_trackRendition = new TrackRendition();
 
+            _dataEvent = new RawTransponderDataEventArgs(new List<string>()
+                { "JAS001;12345;67890;12000;20160101100909111" });
 
+            _fakeTrackData = new TrackData
+            {
+                Tag = "JAS001", 
+                X = 12345,
+                Y = 67890, 
+                Altitude = 12000, 
+                Course = 0, 
+                Velocity = 0, 
+                TimeStamp = DateTime.ParseExact("20160101100909111", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture)
+            };
 
-            //_args = new RawTransponderDataEventArgs();
-
-
-
-
-
-
+            
+            
 
         }
+
+
+        private void RaiseFakeEvent()
+        {
+            _transponderReceiver.TransponderDataReady += Raise.EventWith(_dataEvent);
+        }
+
+
+        [Test]
+        public void HvadSkalJegTeste()
+        {
+            _faketrackList.Add(_fakeTrackData);
+            RaiseFakeEvent();
+            // RaiseFakeEvent();
+            _trackRendition.Received().Print(Arg.Is<List<ITrackData>>(data => data.Equals(_faketrackList)));
+            
+
+        }
+
+
     }
 }

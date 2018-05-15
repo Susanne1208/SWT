@@ -35,6 +35,8 @@ namespace ATM.Test.Unit
             _track2 = new TrackData();
             _track3 = new TrackData();
             _track4 = new TrackData();
+
+            _eventRendition = Substitute.For<IEventRendition>();
             
             //_track1 = Substitute.For<ITrackData>();
             //_track2 = Substitute.For<ITrackData>();
@@ -62,10 +64,12 @@ namespace ATM.Test.Unit
             _trackDataList.Add(_track1);
             _trackDataList.Add(_track2);
 
-
+            _proximityDetectionData.Tag1 = _track1.Tag;
+            _proximityDetectionData.Tag2 = _track2.Tag;
+            _proximityDetectionData.Timestamp = DateTime.Now;;
             _uut.CheckProximityDetection(_trackDataList);
 
-            _eventRendition.Received().LogToFile();
+            _eventRendition.Received().LogToFile(_proximityDetectionData);
         }
 
 
