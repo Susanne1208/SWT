@@ -43,7 +43,7 @@ namespace ATM.Test.Unit
             _track3 = new TrackData();
             //_track4 = new TrackData();
             _track4 = new TrackData
-            {
+            { 
                 Tag = "ABC123",
                 X = 10050,
                 Y = 10050,

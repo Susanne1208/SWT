@@ -70,7 +70,6 @@
     <Compile Include="IT1_ProximityDetection.cs" />
     <Compile Include="IT2_TrackUpdate.cs" />
     <Compile Include="IT3_Filtering.cs" />
-    <Compile Include="IT4.cs" />
     <Compile Include="IT5_.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
