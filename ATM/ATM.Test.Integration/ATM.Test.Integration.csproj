@@ -73,6 +73,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ATM.Classes\ATM.Classes.csproj">
+      <Project>{4c22c063-b839-4f6b-95f1-06e139338f94}</Project>
+      <Name>ATM.Classes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ATM\ATM.csproj">
       <Project>{fb62aa1a-1b30-4d4c-a9ca-7799f049313a}</Project>
       <Name>ATM</Name>

@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FB62AA1A-1B30-4D4C-A9CA-7799F049313A}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>ATM</RootNamespace>
-    <AssemblyName>ATM</AssemblyName>
+    <ProjectGuid>{4C22C063-B839-4F6B-95F1-06E139338F94}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ATM.Classes</RootNamespace>
+    <AssemblyName>ATM.Classes</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,23 +38,29 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="TransponderReceiver, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="TransponderReceiver">
       <HintPath>..\..\TransponderReceiver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="EventRendition.cs" />
+    <Compile Include="Filtering.cs" />
+    <Compile Include="Interfaces\IEventRendition.cs" />
+    <Compile Include="Interfaces\IFiltering.cs" />
+    <Compile Include="Interfaces\IParsing.cs" />
+    <Compile Include="Interfaces\IProximityDetection.cs" />
+    <Compile Include="Interfaces\IProximityDetectionData.cs" />
+    <Compile Include="Interfaces\ITrackData.cs" />
+    <Compile Include="Interfaces\ITrackRendition.cs" />
+    <Compile Include="Interfaces\ITrackUpdate.cs" />
+    <Compile Include="Parsing.cs" />
+    <Compile Include="ProximityDetection.cs" />
+    <Compile Include="ProximityDetectionData.cs" />
+    <Compile Include="TrackData.cs" />
+    <Compile Include="TrackRendition.cs" />
+    <Compile Include="TrackUpdate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ATM.Classes\ATM.Classes.csproj">
-      <Project>{4c22c063-b839-4f6b-95f1-06e139338f94}</Project>
-      <Name>ATM.Classes</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

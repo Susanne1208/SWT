@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ATM.Interfaces;
 using TransponderReceiver;
+using ATM.Classes;
 
 namespace ATM
 {
