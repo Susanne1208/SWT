@@ -15,8 +15,8 @@ namespace ATM
         private int VerticalSeperation = 300; //vertical seperation less than 300 meters
 
         //private readonly IEventRendition _eventRendition;
-        private readonly IEventRendition _eventRendition;
-        private readonly IProximityDetectionData _proximityDetectionData;
+        private  IEventRendition _eventRendition;
+        private  IProximityDetectionData _proximityDetectionData;
 
 
 
@@ -58,6 +58,7 @@ namespace ATM
                         _proximityDetectionData.Tag2 = track2.Tag;
                         _proximityDetectionData.Timestamp = DateTime.Now;
                         
+                       
                         //Sending data to EventRendition class to be log and printed on console application
                         //_eventRendition.LogToFile(_proximityDetectionData);
                         //_eventRendition.PrintEvent(_proximityDetectionData);

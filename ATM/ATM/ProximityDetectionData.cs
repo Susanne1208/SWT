@@ -10,14 +10,17 @@ namespace ATM
     public class ProximityDetectionData: IProximityDetectionData
     {
         //Each time a track is to close to each other a file need to log the following information: tags and time of event.
-        public string Tag1;
-        public string Tag2;
-        public DateTime Timestamp;
-        public ProximityDetectionData(string tag1, string tag2, DateTime timestamp)
+        public string Tag1{ get; set;}
+        public string Tag2 { get; set;}
+        public DateTime Timestamp { get; set; }
+        public ProximityDetectionData()
         {
-            Tag1 = tag1;
-            Tag2 = tag2;
-            Timestamp = timestamp;
+            Tag1 = "";
+            Tag2 = "";
+            Timestamp = DateTime.MinValue;
         }
+
+
+      
     }
 }

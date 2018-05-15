@@ -8,5 +8,8 @@ namespace ATM.Interfaces
 {
     public interface IProximityDetectionData
     {
+        string Tag1 { get; set; }
+        string Tag2 { get; set; }
+        DateTime Timestamp { get; set; }
     }
 }
