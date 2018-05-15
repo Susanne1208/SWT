@@ -15,12 +15,14 @@ namespace ATM.Test.Unit
     {
         private IProximityDetection _uut;
         private List<ITrackData> _trackDataList;
+
+        private List<IProximityDetectionData> _proximityDetections;
         //private ITrackData _track1;
         //private ITrackData _track2;
         private ITrackData _track1, _track2, _track3, _track4;
 
         private IEventRendition _eventRendition;
-        private ProximityDetectionData _proximityDetectionData;
+        private IProximityDetectionData _proximityDetectionData;
 
         //Horizontal seperation less than 5000 meters
         //vertical seperation less than 300 meters
@@ -31,6 +33,8 @@ namespace ATM.Test.Unit
             _uut = new ProximityDetection(_eventRendition, _proximityDetectionData);
 
             _trackDataList = new List<ITrackData>();
+            _proximityDetectionData = new ProximityDetectionData();
+            _proximityDetections = Substitute.For<List<IProximityDetectionData>>();
             _track1 = new TrackData();
             _track2 = new TrackData();
             _track3 = new TrackData();
@@ -38,10 +42,32 @@ namespace ATM.Test.Unit
 
             _eventRendition = Substitute.For<IEventRendition>();
             
-            //_track1 = Substitute.For<ITrackData>();
-            //_track2 = Substitute.For<ITrackData>();
+            
         }
 
+        [Test]
+        public void eoauehaefha()
+        {
+            _track1.Tag = "ART123";
+            _track2.Tag = "THF334";
+            _track1.X = 30000;
+            _track2.X = 30050;
+            _track1.Y = 50000;
+            _track2.Y = 50050;
+            _track1.Altitude = 5000;
+            _track2.Altitude = 5050;
+
+            _trackDataList.Add(_track1);
+            _trackDataList.Add(_track2);
+
+            _proximityDetectionData.Tag1 = _track1.Tag;
+            _proximityDetectionData.Tag2 = _track2.Tag;
+            _proximityDetectionData.Timestamp = DateTime.Now;
+            _uut.CheckProximityDetection(_trackDataList);
+            _proximityDetections.Add(_proximityDetectionData);
+
+            _eventRendition.Received().LogToFile(_proximityDetections);
+        }
 
         [TestCase(11111, 22222, 33333, 4444, 8000, 8100, true)] //Horizontal conflict
         [TestCase(11111, 22222, 1122, 2233, 8000, 8700, true)] // Vertical conflict
@@ -66,7 +92,7 @@ namespace ATM.Test.Unit
 
             _proximityDetectionData.Tag1 = _track1.Tag;
             _proximityDetectionData.Tag2 = _track2.Tag;
-            _proximityDetectionData.Timestamp = DateTime.Now;;
+            _proximityDetectionData.Timestamp = DateTime.Now;
             _uut.CheckProximityDetection(_trackDataList);
 
             //_eventRendition.Received().LogToFile(_proximityDetectionData);
@@ -85,16 +111,16 @@ namespace ATM.Test.Unit
             _track2.X = x2;
             _track2.Y = y2;
             _track2.Altitude = alt2;
-            
+
             _trackDataList.Add(_track1);
             _trackDataList.Add(_track2);
             _uut.CheckProximityDetection(_trackDataList);
-           // _eventRendition.DidNotReceive().LogToFile();
+            // _eventRendition.DidNotReceive().LogToFile();
 
         }
 
-        [TestCase(11111, 22222, 33333, 4444, 8000, 8100, true)] //Horizontal conflict
-        [TestCase(11111, 22222, 1122, 2233, 8000, 8700, true)] // Vertical conflict
+        [TestCase(11111, 22222, 33333, 4444, 8000, 8100)] //Horizontal conflict
+        [TestCase(11111, 22222, 1122, 2233, 8000, 8700)] // Vertical conflict
         public void CheckProximityDetection_EventRendition_PrintEventIsCalled(int x1, int y1, int x2, int y2, int alt1, int alt2)
         {
             //_uut.CheckProximityDetection(_trackDataList);
@@ -102,23 +128,18 @@ namespace ATM.Test.Unit
 
             //PrintEvent is called when tracks are colliding
 
-            _track1.X = x1;
-            _track1.Y = y1;
-            _track1.Altitude = alt1;
-
-            _track2.X = x2;
-            _track2.Y = y2;
-            _track2.Altitude = alt2;
-
-            _trackDataList.Add(_track1);
-            _trackDataList.Add(_track2);
+            _proximityDetectionData.Tag1 = "AB1234";
+            _proximityDetectionData.Tag2 = "AB1236";
 
 
-            _uut.CheckProximityDetection(_trackDataList);
+            _proximityDetections.Add(_proximityDetectionData);
+            _proximityDetections.Add(_proximityDetectionData);
 
-            //_eventRendition.Received().PrintEvent();
+
+            //_uut.CheckProximityDetection(_trackDataList);
+
+            _eventRendition.Received().PrintEvent(_proximityDetections);
         }
-
 
         [TestCase(11111, 22222, 33333, 44444, 8000, 6000)] //Horizontal NO Conflict
         [TestCase(11111, 22222, 40000, 50000, 8000, 7000)] // Vertical NO conflict
@@ -140,41 +161,5 @@ namespace ATM.Test.Unit
 
         }
 
-        ////x1, y1, x2, y2,  alt1, alt2, result
-        //[TestCase(11111,22222,33333,4444,8000,8100, true)] //Horizontal conflict
-        //[TestCase(11111,22222,1122,2233,8000,8700, true)] // Vertical conflict
-        //public void IsTracksInConflict_returnsTrue(int x1, int y1, int x2, int y2, int alt1, int alt2, bool result)
-        //{
-        //    //track1 and track 2 is conflicting because of horizontal and vertical distance
-        //    _track1.X = x1;
-        //    _track1.Y = y1;
-        //    _track1.Altitude = alt1;
-
-        //    _track2.X = x2;
-        //    _track2.Y = y2;
-        //    _track2.Altitude = alt2;
-
-        //    //Assert.AreEqual();
-        //    //Assert.AreEqual(result, _uut.IsTracksInConflict(_track1,_track2));
-
-
-        //}
-
-        ////x1, y1, x2, y2,  alt1, alt2, result
-        //[TestCase(11111, 22222, 33333, 44444, 8000, 6000, false)] //Horizontal
-        //[TestCase(11111, 22222, 40000, 50000, 8000, 7000, false)] // Vertical
-        //public void IsTracksInConflict_returnsFalse(int x1, int y1, int x2, int y2, int alt1, int alt2, bool result)
-        //{
-        //    //track1 and track 2 is NOT conflicting because of distance
-        //    _track1.X = x1;
-        //    _track1.Y = y1;
-        //    _track1.Altitude = alt1;
-
-        //    _track2.X = x2;
-        //    _track2.Y = y2;
-        //    _track2.Altitude = alt2;
-
-        //    //Assert.AreEqual(result, _uut.IsTracksInConflict(_track1, _track2));
-        //}
     }
 }

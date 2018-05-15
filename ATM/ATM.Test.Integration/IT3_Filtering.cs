@@ -14,61 +14,106 @@ namespace ATM.Test.Integration
     [TestFixture]
     class IT3_Filtering
     {
-        private IParsing _fakeParsing;
+        
         private ITrackRendition _trackRendition;
         private ITrackUpdate _trackUpdate;
         private IEventRendition _eventRendition;
         private IProximityDetectionData _proximityDetectionData;
         private IProximityDetection _proximityDetection;
+        private IFiltering _filtering;
 
-        private ITrackData _fakeTrackDataValid;
-        private ITrackData _fakeTrackDataInvalid;
+        private ITrackData _fakeTrackDataValid1;
+        private ITrackData _fakeTrackDataValid2;
+        private ITrackData _fakeTrackDataValid3;
+        private ITrackData _fakeTrackDataValid4;
         private List<ITrackData> _fakeTrackDataList;
+        private List<ITrackData> _fakeExpectedDataList;
 
         [SetUp]
         public void SetUp()
         {
-            _fakeParsing = Substitute.For<Parsing>();
-            _trackRendition = new TrackRendition();
+            _trackRendition = Substitute.For<ITrackRendition>();
             _proximityDetectionData = new ProximityDetectionData();
-            //_eventRendition = new EventRendition(_proximityDetectionData);
+            _eventRendition = new EventRendition();
             _proximityDetection = new ProximityDetection(_eventRendition, _proximityDetectionData);
             _trackUpdate = new TrackUpdate(_trackRendition, _proximityDetection);
+            _filtering = new Filtering(_trackUpdate);
 
             _fakeTrackDataList = new List<ITrackData>();
-            _fakeTrackDataValid = new TrackData
+            
+            _fakeTrackDataValid1 = new TrackData
             {
-                X = 11000,
-                Y = 11000,
-                Altitude = 15000
+                Tag = "JAS002",
+                X = 50000,
+                Y = 50000,
+                Altitude = 12000,
+                Course = 0,
+                TimeStamp = new DateTime(2018, 05, 13, 10, 50, 35),
+                Velocity = 0
             };
-            _fakeTrackDataInvalid = new TrackData
+            
+            _fakeTrackDataValid2 = new TrackData
             {
-                X = 9000,
-                Y = 9000,
-                Altitude = 200
+                Tag = "JAS002",
+                X = 50100,
+                Y = 50100,
+                Altitude = 12000,
+                Course = 0,
+                TimeStamp = new DateTime(2018, 05, 13, 10, 50, 36),
+                Velocity = 0
+            };
+
+           _fakeTrackDataValid3 = new TrackData
+            {
+                Tag = "JAS002",
+                X = 20000,
+                Y = 20000,
+                Altitude = 12000,
+                Course = 0,
+                TimeStamp = DateTime.MinValue,
+                Velocity = 0
+            };
+
+            _fakeTrackDataValid4 = new TrackData
+            {
+                Tag = "JAS002",
+                X = 10000,
+                Y = 10000,
+                Altitude = 12000,
+                Course = 0,
+                TimeStamp = DateTime.MinValue,
+                Velocity = 0
             };
         }
 
         [Test]
-        public void ValidateTracks_TracksInArea_IsCorrect()
+        public void ValidateTracks_ValidTracks_PrintsCalculatedVelocity()
         {
-            _fakeTrackDataList.Add(_fakeTrackDataValid);
+            //Adds fake data to list
+            _fakeTrackDataList.Add(_fakeTrackDataValid1);
+            _filtering.ValidateTracks(_fakeTrackDataList);
 
+            _fakeTrackDataList.Clear();
+            _fakeTrackDataList.Add(_fakeTrackDataValid2);
 
-            //_uut.ValidateTracks(_fakeTrackDataList);
+            _filtering.ValidateTracks(_fakeTrackDataList);
 
-
-            _trackUpdate.Received().Update(Arg.Is<List<ITrackData>>(x => x.Count == 1));
+           _trackRendition.Received().Print(Arg.Is<List<ITrackData>>(data => data[0].Tag == "JAS002" && data[0].Velocity == (int)141));
         }
+
         [Test]
-        public void ValidateTracks_TracksNotInArea_IsCorrect()
+        public void ValidateTrack_ValidTracks_PrintsCalculatedCourse()
         {
-            _fakeTrackDataList.Add(_fakeTrackDataInvalid);
+            _fakeTrackDataList.Clear();
+            _fakeTrackDataList.Add(_fakeTrackDataValid4);
+            _filtering.ValidateTracks(_fakeTrackDataList);
 
-           // _uut.ValidateTracks(_fakeTrackDataList);
+            _fakeTrackDataList.Clear();
+            _fakeTrackDataList.Add(_fakeTrackDataValid3);
 
-            _trackUpdate.Received().Update(Arg.Is<List<ITrackData>>(x => x.Count == 0));
+            _filtering.ValidateTracks(_fakeTrackDataList);
+
+            _trackRendition.Received().Print(Arg.Is<List<ITrackData>>(data => data[0].Tag == "JAS002" && data[0].Course == (int)225));
         }
     }
 }
