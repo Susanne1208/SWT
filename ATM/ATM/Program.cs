@@ -13,6 +13,7 @@ namespace ATM
     {
         static void Main(string[] args)
         {
+            Console.Title = "Air Monitoring System";
             ITransponderReceiver transponderDataReceiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
 
             IEventRendition eventRendition = new EventRendition();
