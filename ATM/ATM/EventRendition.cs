@@ -11,12 +11,12 @@ namespace ATM
 {
     public class EventRendition : IEventRendition
     {
-        //private readonly ProximityDetectionData _proximityDetectionData;
+        private readonly ProximityDetectionData _proximityDetectionData;
 
-        //public EventRendition(ProximityDetectionData proximityDetectionData)
-        //{
-        //    _proximityDetectionData = proximityDetectionData;
-        //}
+        public EventRendition(ProximityDetectionData proximityDetectionData)
+        {
+            _proximityDetectionData = proximityDetectionData;
+        }
 
         public EventRendition()
         {
@@ -41,16 +41,16 @@ namespace ATM
         //    File.WriteAllText(path, text);
         //}
 
-        public void PrintEvent()
-        {   
-            //Print the collision waring to the console application
-            //System.Console.WriteLine(seperationData);
-        }
-
         //public void PrintEvent()
         //{
-        //    //Print the collision waring to the console application
-        //    System.Console.WriteLine(_proximityDetectionData);
+        //    Print the collision waring to the console application
+        //    System.Console.WriteLine(seperationData);
         //}
+
+        public void PrintEvent()
+        {
+            //Print the collision waring to the console application
+            System.Console.WriteLine(_proximityDetectionData);
+        }
     }
 }
