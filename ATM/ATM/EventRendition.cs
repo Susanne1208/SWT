@@ -23,34 +23,21 @@ namespace ATM
         {
         }
 
+
         public void LogToFile()
         {
+            string path = @"C:\Temp\Logfile.txt";
+            string text = "Planes in conflict: " + _proximityDetectionData.Tag1 + " and " + _proximityDetectionData.Tag2 +
+                          "\nTime of occurance: " + _proximityDetectionData.Timestamp;
 
-        //    //string path = @"C:\Temp\Logfile.txt";
-        //    //string text = "Planes in conflict: " + seperationData.TAG1 + " and " + seperationData.TAG2 +
-        //    //                  "\nTime of occurance: " + seperationData.TimeStamp;
-        //    //File.WriteAllText(path, text);
-        //    //System.Console.WriteLine("TEST);
+            File.WriteAllText(path, text);
         }
 
-        //public void LogToFile()
-        //{
-        //    string path = @"C:\Temp\Logfile.txt";
-        //    string text = "Planes in conflict: " + _proximityDetectionData.Tag1 + " and " + _proximityDetectionData.Tag2 +
-        //                  "\nTime of occurance: " + _proximityDetectionData.Timestamp;
 
-        //    File.WriteAllText(path, text);
-        //}
-
-        //public void PrintEvent()
-        //{
-        //    Print the collision waring to the console application
-        //    System.Console.WriteLine(seperationData);
-        //}
 
         public void PrintEvent()
         {
-            //Print the collision waring to the console application
+            //Print the collision warning to the console
             System.Console.WriteLine(_proximityDetectionData);
         }
     }
