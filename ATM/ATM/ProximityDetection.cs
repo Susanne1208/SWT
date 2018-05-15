@@ -13,10 +13,11 @@ namespace ATM
     {
         private int HorizontalSeperation = 5000; //Horizontal seperation less than 5000 meters
         private int VerticalSeperation = 300; //vertical seperation less than 300 meters
-
+        
         //private readonly IEventRendition _eventRendition;
         private  IEventRendition _eventRendition;
         private  IProximityDetectionData _proximityDetectionData;
+        private List<IProximityDetectionData> _proximityDetectionDatas;
 
 
 
@@ -26,6 +27,7 @@ namespace ATM
             //Need to call LogToFile
             _eventRendition = eventRendition;
             _proximityDetectionData = proximityDetectionData;
+            _proximityDetectionDatas = new List<IProximityDetectionData>();
         }
 
         public void CheckProximityDetection(List<ITrackData> trackDataList)
@@ -62,14 +64,16 @@ namespace ATM
                         //Sending data to EventRendition class to be log and printed on console application
                         //_eventRendition.LogToFile(_proximityDetectionData);
                         //_eventRendition.PrintEvent(_proximityDetectionData);
-                        _eventRendition.PrintEvent();
-                        _eventRendition.LogToFile();
+                        _proximityDetectionDatas.Add(_proximityDetectionData);
+                        _eventRendition.PrintEvent(_proximityDetectionDatas);
+                        _eventRendition.LogToFile(_proximityDetectionDatas);
                         
 
                         //the time og the event needs to be logged to files or application
                         //track1.TimeStamp = DateTime.Now;
                         
                     }
+
                 }
             }
         }
