@@ -43,16 +43,11 @@ namespace ATM
 
         public void PrintEvent(List<IProximityDetectionData> proximityDetectionDatas)
         {
-            //_proximityDetectionData = proximityDetectionData;
             //Print the collision warning to the console
            foreach (var data in proximityDetectionDatas)
             {
                 System.Console.WriteLine(data);
-                
-            }
-            
+           }
         }
-
-       
     }
 }
