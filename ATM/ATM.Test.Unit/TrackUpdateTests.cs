@@ -179,6 +179,7 @@ namespace ATM.Test.Unit
         [TestCase(20000, 20000, 10000, 10000, 180)]
         [TestCase(50000, 87000, 90000, 50000, 137)]
         [TestCase(50000, 87000, 10000, 50000, 42)]
+        [TestCase(80000, 77000, 10000, 50000, 355)]
 
         public void CalCourse_CalculateTrack1andTrack2_Returns(int x1, int x2, int y1, int y2, int result)
         {

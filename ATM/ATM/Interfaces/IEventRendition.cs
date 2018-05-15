@@ -9,7 +9,8 @@ namespace ATM
 {
     public interface IEventRendition
     {
-        void LogToFile(IProximityDetectionData proximityDetectionData);
-        void PrintEvent(IProximityDetectionData proximityDetectionData);
+        void LogToFile(List<IProximityDetectionData> proximityDetectionDatas);
+        void PrintEvent(List<IProximityDetectionData> proximityDetectionDatas);
+        
     }
 }

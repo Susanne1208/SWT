@@ -20,7 +20,12 @@ namespace ATM
             Timestamp = DateTime.MinValue;
         }
 
+        public override string ToString()
+        {
+            var str = $"{Tag1}: conflicts with {Tag2} at {Timestamp}";
+            return str;
 
-      
+        }
+
     }
 }
