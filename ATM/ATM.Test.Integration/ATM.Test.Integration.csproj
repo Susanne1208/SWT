@@ -67,9 +67,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IT1_ProximityDetection.cs" />
-    <Compile Include="IT2_TrackUpdate.cs" />
-    <Compile Include="IT3_Filtering.cs" />
+    <Compile Include="IT1_.cs" />
+    <Compile Include="IT2_.cs" />
+    <Compile Include="IT3_.cs" />
     <Compile Include="IT4.cs" />
     <Compile Include="IT5_.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
