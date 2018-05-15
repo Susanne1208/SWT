@@ -130,8 +130,8 @@ namespace ATM.Test.Unit
         [Test]
         public void ThreeTracksInList_CountCorrect()
         {
-           _fakeTransponderDataEventArgs.TransponderData.Add("JAS002;12345;67890;12000;2016010110090901");
-           _fakeTransponderDataEventArgs.TransponderData.Add("JAS002;12345;67890;12000;2016010110090901");
+           _fakeTransponderDataEventArgs.TransponderData.Add("JAS002;12345;67890;12000;20160101100909111");
+           _fakeTransponderDataEventArgs.TransponderData.Add("JAS002;12345;67890;12000;20160101100909111");
            RaiseFakeEvent();
             _filtering.Received().ValidateTracks(Arg.Is<List<ITrackData>>(x => x.Count == 3));
 
@@ -140,8 +140,8 @@ namespace ATM.Test.Unit
         [Test]
         public void ThreeTracksInList_ThirdTagCorrect()
         {
-           _fakeTransponderDataEventArgs.TransponderData.Add("JAS002;12345;67890;12000;2016010110090901");
-           _fakeTransponderDataEventArgs.TransponderData.Add("JAS003;12345;67890;12000;2016010110090901");
+           _fakeTransponderDataEventArgs.TransponderData.Add("JAS002;12345;67890;12000;20160101100909111");
+           _fakeTransponderDataEventArgs.TransponderData.Add("JAS003;12345;67890;12000;20160101100909111");
             RaiseFakeEvent();
             _filtering.Received().ValidateTracks(Arg.Is<List<ITrackData>>(x => x[2].Tag == "JAS003"));
 
