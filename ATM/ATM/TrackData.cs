@@ -14,8 +14,8 @@ namespace ATM.Data
         public int X { get; set;  }
         public int Y { get; set; }
         public int Altitude { get; set; }
-        public double Velocity { get; set; }
-        public double Course { get; set; }
+        public int Velocity { get; set; }
+        public int Course { get; set; }
 
         public DateTime TimeStamp { get; set; }
 
