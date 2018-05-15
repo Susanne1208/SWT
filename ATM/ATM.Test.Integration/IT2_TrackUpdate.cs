@@ -81,33 +81,20 @@ namespace ATM.Test.Integration
             _fakeTrackDataList.Add(_fakeTrackDataValid2);
             _trackUpdate.Update(_fakeTrackDataList);
             
-            //_trackRendition.Received().Print(Arg.Is<List<ITrackData>>(data => data[0].Tag== "JAS002"));
-            //_fakeTrackDataList.Clear();
-
-            //_fakeTrackDataList.Add(_fakeTrackDataValid2);
-            //_trackUpdate.Update(_fakeTrackDataList);
-            
-            //_trackRendition.Received().Print(Arg.Is<List<ITrackData>>(data => data[0].Tag == "J5S002"));
             _eventRendition.Received().PrintEvent(Arg.Is<List<IProximityDetectionData>>(data=>data[0].Tag1== "J5S002"));// && data[0].Tag2== _fakeTrackDataValid2.Tag));
         }
 
-        public void
+        [Test]
+        public void Update_SeperationEventTrue_SeperationDataLoggedToFile()
+        {
+            _fakeTrackDataList.Add(_fakeTrackDataValid1);
+            _fakeTrackDataList.Add(_fakeTrackDataValid2);
+            _trackUpdate.Update(_fakeTrackDataList);
 
-        //public void printNewList_NewlistPrinted()
-        //{
-        //    _fakeTrackDataList.Add(_fakeTrackDataValid1);
-        //    _trackUpdate.Update(_fakeTrackDataList);
+            _eventRendition.Received().LogToFile(Arg.Is<List<IProximityDetectionData>>(data=>data[0].Tag1=="J5S002"));
+        }
 
-
-        //    _fakeTrackDataList.Clear();
-        //    _fakeTrackDataList.Add(_fakeTrackDataValid2);
-        //    _trackUpdate.Update(_fakeTrackDataList);
-
-            
-
-        //    _trackRendition.Received().Print(Arg.Is<List<IProximityDetectionData>>(data=>data[0].Tag1==_fakeTrackDataValid1.Tag && data[0].Tag2==_fakeTrackDataValid2.Tag));
-
-        //}
+     
 
 
 
