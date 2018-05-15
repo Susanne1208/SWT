@@ -28,10 +28,10 @@ namespace ATM.Test.Integration
         {
             _trackData = new List<ITrackData>();  //elementerne i listen skal subtitutes
             //_filtering = Substitute.For<IFiltering>();
-            
-            _trackRendition=new TrackRendition();
+
+            _trackRendition = new TrackRendition();
             _eventRendition = new EventRendition();
-            _proximityDetection = new ProximityDetection(_eventRendition,_proximityDetectionData);
+            _proximityDetection = new ProximityDetection(_eventRendition, _proximityDetectionData);
             //_proximityDetectionData = Substitute.For<IProximityDetectionData>();
             _trackUpdate = new TrackUpdate(_trackRendition, _proximityDetection);
             _track1 = Substitute.For<ITrackData>();
@@ -44,11 +44,11 @@ namespace ATM.Test.Integration
             _track1.X.Returns(50000);
             _track1.Y.Returns(90000);
             _trackData.Add(_track1);
-           _trackRendition.Print(_trackData);
-           _trackRendition.Received().Print(_trackData);
-            
+            _trackRendition.Print(_trackData);
+            _trackRendition.Received().Print(_trackData);
+
         }
-        
+
 
 
 
