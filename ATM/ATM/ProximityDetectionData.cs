@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ATM.Interfaces;
 
 namespace ATM
 {
-    public class ProximityDetectionData
+    public class ProximityDetectionData: IProximityDetectionData
     {
         //Each time a track is to close to each other a file need to log the following information: tags and time of event.
         public string Tag1;

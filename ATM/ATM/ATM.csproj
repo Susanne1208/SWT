@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="EventRendition.cs" />
     <Compile Include="Interfaces\IEventRendition.cs" />
+    <Compile Include="Interfaces\IProximityDetectionData.cs" />
     <Compile Include="Interfaces\ITrackData.cs" />
     <Compile Include="Interfaces\ITrackUpdate.cs" />
     <Compile Include="Filtering.cs" />
