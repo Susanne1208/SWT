@@ -76,7 +76,7 @@ namespace ATM.Test.Integration
 
 
         [Test]
-        public void OneTrackInList_CountCorrect()
+        public void RaisedEvent_ValidTracks_CorrectTrackCount()
         {
             RaiseFakeEvent();
             _trackRendition.Received().Print(Arg.Is<List<ITrackData>>(data => data.Count == 1));
@@ -86,7 +86,7 @@ namespace ATM.Test.Integration
 
 
         [Test]
-        public void OneTrackInList_TagCorrect()
+        public void RaisedEvent_ValidTracks_CorrectTagName()
         {
             
             RaiseFakeEvent();
@@ -95,7 +95,7 @@ namespace ATM.Test.Integration
         }
 
         [Test]
-        public void OneTrackInList_XCorrect()
+        public void RaisedEvent_ValidTracks_CorrectXValueReceived()
         {
 
             
@@ -105,7 +105,7 @@ namespace ATM.Test.Integration
 
 
         [Test]
-        public void OneTrackInList_YCorrect()
+        public void RaisedEvent_ValidTracks_CorrectYValueReceived()
         {
 
             
@@ -114,7 +114,7 @@ namespace ATM.Test.Integration
         }
 
         [Test]
-        public void OneTrackInList_AltitudeCorrect()
+        public void RaisedEvent_ValidTracks_CorrectAltitudeReceived()
         {
 
             
@@ -124,7 +124,7 @@ namespace ATM.Test.Integration
 
 
         [Test]
-        public void OneTrackInList_TimeStampYearCorrect()
+        public void RaisedEvent_ValidTracks_CorrectTimeStampYearReceived()
         {
 
             
@@ -134,7 +134,7 @@ namespace ATM.Test.Integration
 
 
         [Test]
-        public void OneTrackInList_TimeStampMonthCorrect()
+        public void RaisedEvent_ValidTracks_CorrectTimeStampMonthReceived()
         {
             
             RaiseFakeEvent();
@@ -142,7 +142,7 @@ namespace ATM.Test.Integration
         }
 
         [Test]
-        public void OneTrackInList_TimeStampDayCorrect()
+        public void RaisedEvent_ValidTracks_CorrectTimeStampDayReceived()
         {
            
             RaiseFakeEvent();
@@ -150,7 +150,7 @@ namespace ATM.Test.Integration
         }
 
         [Test]
-        public void OneTrackInList_TimeStampHourCorrect()
+        public void RaisedEvent_ValidTracks_CorrectTimeStampHourReceived()
         {
             
             RaiseFakeEvent();
@@ -158,7 +158,7 @@ namespace ATM.Test.Integration
         }
 
         [Test]
-        public void OneTrackInList_TimeStampMinuteCorrect()
+        public void RaisedEvent_ValidTracks_CorrectTimeStampMinuteReceived()
         {
             RaiseFakeEvent();
             _trackRendition.Received().Print(Arg.Is<List<ITrackData>>(data => data[0].TimeStamp.Minute == 09));
@@ -166,7 +166,7 @@ namespace ATM.Test.Integration
 
 
         [Test]
-        public void OneTrackInList_TimeStampSecondCorrect()
+        public void RaisedEvent_ValidTracks_CorrectTimeStampSecondReceived()
         {
            
             RaiseFakeEvent();
@@ -174,7 +174,7 @@ namespace ATM.Test.Integration
         }
 
         [Test]
-        public void OneTrackInList_TimeStampMsCorrect()
+        public void RaisedEvent_ValidTracks_CorrectTimeStampMillisecondsReceived()
         {
             
             RaiseFakeEvent();
@@ -182,7 +182,7 @@ namespace ATM.Test.Integration
         }
 
         [Test]
-        public void ThreeTracksInList_CountCorrect()
+        public void RaisedEvent_ThreeValidTracks_CorrectCountReceived()
         {
             
            _dataEvent.TransponderData.Add("JAS002;12345;67890;12000;20160101100909111");
@@ -193,7 +193,7 @@ namespace ATM.Test.Integration
         }
 
         [Test]
-        public void ThreeTracksInList_ThirdTagCorrect()
+        public void RaisedEvent_ThreeValidTracks_CorrectTagsReceived()
         {
             _faketrackList.Add(_fakeTrackData);
             _dataEvent.TransponderData.Add("JAS002;12345;67890;12000;20160101100909111");
