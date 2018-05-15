@@ -25,21 +25,22 @@ namespace ATM
         {
         }
 
-       
+
 
         public void LogToFile(List<IProximityDetectionData> proximityDetectionDatas)
         {
-            string path = @"C:\Temp\Logfile.txt";
 
-            foreach (var proximityDetectionData in proximityDetectionDatas)
+            using (StreamWriter outputFile = new StreamWriter(@"Logfile.txt", true))
             {
-                string text = "Planes in conflict: " + proximityDetectionData.Tag1 + " and " + proximityDetectionData.Tag2 +
-                              "\nTime of occurance: " + proximityDetectionData.Timestamp;
-
-                File.WriteAllText(path, text);
+                foreach (var proximityDetectionData in proximityDetectionDatas)
+                {
+                    string text = "Planes in conflict: " + proximityDetectionData.Tag1 + " and " +
+                                  proximityDetectionData.Tag2 +
+                                  "\nTime of occurance: " + proximityDetectionData.Timestamp;
+                    outputFile.WriteLine(text);
+                }
             }
-            
-        }
+        }  
 
         public void PrintEvent(List<IProximityDetectionData> proximityDetectionDatas)
         {

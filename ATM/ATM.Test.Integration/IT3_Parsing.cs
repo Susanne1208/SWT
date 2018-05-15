@@ -188,7 +188,7 @@ namespace ATM.Test.Integration
            _dataEvent.TransponderData.Add("JAS002;12345;67890;12000;20160101100909111");
            _dataEvent.TransponderData.Add("JAS003;12345;67890;12000;20160101100909111");
            RaiseFakeEvent();
-            _trackRendition.Received().Print(Arg.Is<List<ITrackData>>(data => data.Count == 3));
+           _trackRendition.Received().Print(Arg.Is<List<ITrackData>>(data => data.Count == 3));
 
         }
 
