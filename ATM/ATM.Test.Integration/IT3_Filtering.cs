@@ -34,7 +34,7 @@ namespace ATM.Test.Integration
         {
             _trackRendition = Substitute.For<ITrackRendition>();
             _proximityDetectionData = new ProximityDetectionData();
-            _eventRendition = new EventRendition(_proximityDetectionData);
+            _eventRendition = new EventRendition();
             _proximityDetection = new ProximityDetection(_eventRendition, _proximityDetectionData);
             _trackUpdate = new TrackUpdate(_trackRendition, _proximityDetection);
             _filtering = new Filtering(_trackUpdate);
