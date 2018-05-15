@@ -60,8 +60,8 @@ namespace ATM
                         
                        
                         //Sending data to EventRendition class to be log and printed on console application
-                        //_eventRendition.LogToFile(_proximityDetectionData);
-                        //_eventRendition.PrintEvent(_proximityDetectionData);
+                        _eventRendition.LogToFile(_proximityDetectionData);
+                        _eventRendition.PrintEvent(_proximityDetectionData);
                         _eventRendition.PrintEvent();
                         _eventRendition.LogToFile();
                         
