@@ -27,8 +27,7 @@ namespace ATM.Test.Integration
         private ITrackData _fakeTrackDataValid3;
         private ITrackData _fakeTrackDataValid4;
         private List<ITrackData> _fakeTrackDataList;
-        private List<ITrackData> _fakeExpectedDataList;
-
+        
         [SetUp]
         public void SetUp()
         {
