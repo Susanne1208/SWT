@@ -38,24 +38,29 @@ namespace ATM
                 foreach (var track2 in trackDataList)
                 {
                     //Track data
-                    double x1 = track1.X;
-                    double x2 = track2.X;
-                    double y1 = track1.Y;
-                    double y2 = track2.Y;
-                    double alt1 = track1.Altitude;
-                    double alt2 = track1.Altitude;
+                    //double x1 = track1.X;
+                    //double x2 = track2.X;
+                    //double y1 = track1.Y;
+                    //double y2 = track2.Y;
+                    //double alt1 = track1.Altitude;
+                    //double alt2 = track1.Altitude;
 
 
                     //Formula: sqrt((x1-x2)^2+(y1-y2)^2)
-                    var horizantalDistance = Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
+                    //var horizantalDistance = Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
+                    double horizantalDistance = Math.Sqrt(Math.Pow(track1.X - track2.X,2) + Math.Pow(track1.Y - track2.Y,2));
 
                     //vertical seperation less than 300 meters
-                    var veritalDistance = Math.Abs(alt1 - alt2);
+                    //var veritalDistance = Math.Abs(alt1 - alt2);
+                    double veritalDistance = Math.Abs(track2.Altitude - track1.Altitude);
 
                     // If the to two planes tag is different and is conflicting with the minimum seperation.
-                    if (track1.Tag != track2.Tag && veritalDistance < VerticalSeperation && horizantalDistance < HorizontalSeperation)
+                    //veritalDistance <= VerticalSeperation && horizantalDistance <= 5000 && track1.Tag != track2.Tag
+                    if (horizantalDistance <= HorizontalSeperation && veritalDistance <= VerticalSeperation && track1.Tag != track2.Tag)
                     {
                         //_proximityDetectionData(track1.Tag, track2.Tag, DateTime.Now);
+                        
+                        
                         _proximityDetectionData.Tag1 = track1.Tag;
                         _proximityDetectionData.Tag2 = track2.Tag;
                         _proximityDetectionData.Timestamp = DateTime.Now;
@@ -64,6 +69,7 @@ namespace ATM
                         //Sending data to EventRendition class to be log and printed on console application
                         //_eventRendition.LogToFile(_proximityDetectionData);
                         //_eventRendition.PrintEvent(_proximityDetectionData);
+
                         _proximityDetectionDatas.Add(_proximityDetectionData);
 
                         _eventRendition.PrintEvent(_proximityDetectionDatas);
