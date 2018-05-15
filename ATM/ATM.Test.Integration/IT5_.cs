@@ -24,6 +24,7 @@ namespace ATM.Test.Integration
         private IParsing _parsing;
         private IEventRendition _eventRendition;
         private ITransponderReceiver _transponderReceiver;
+        private IProximityDetectionData _proximityDetectionData;
 
         private List<ITrackData> tracks;
         private RawTransponderDataEventArgs _args;
@@ -35,15 +36,17 @@ namespace ATM.Test.Integration
         [SetUp]
         public void Setup()
         {
+            //_transponderReceiver = Substitute.For<ITransponderReceiver>()
+
+            _proximityDetectionData = new ProximityDetectionData();
+            _eventRendition = new EventRendition(_proximityDetectionData);
+            _proximityDetection = new ProximityDetection(_eventRendition, _proximityDetectionData);
+            _trackUpdate = new TrackUpdate(_trackRendition, _proximityDetection);
+            _filtering = new Filtering(_trackUpdate);
             _parsing = new Parsing(_transponderReceiver, _filtering);
             _trackData = new TrackData();
-
-            _transponderReceiver = Substitute.For<ITransponderReceiver>();
-            _eventRendition = Substitute.For<IEventRendition>();
-            _trackUpdate = Substitute.For<ITrackUpdate>();
-            _trackRendition = Substitute.For<ITrackRendition>();
-            _filtering = Substitute.For<IFiltering>();
-            _proximityDetection = Substitute.For<IProximityDetection>(); 
+           
+            
 
 
 

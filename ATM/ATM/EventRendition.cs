@@ -6,14 +6,15 @@
 ////using System.Threading.Tasks;
 
 using System.IO;
+using ATM.Interfaces;
 
 namespace ATM
 {
     public class EventRendition : IEventRendition
     {
-        private readonly ProximityDetectionData _proximityDetectionData;
+        private readonly IProximityDetectionData _proximityDetectionData;
 
-        public EventRendition(ProximityDetectionData proximityDetectionData)
+        public EventRendition(IProximityDetectionData proximityDetectionData)
         {
             _proximityDetectionData = proximityDetectionData;
         }
