@@ -35,6 +35,8 @@ namespace ATM.Test.Unit
             _track2 = new TrackData();
             _track3 = new TrackData();
             _track4 = new TrackData();
+
+            _eventRendition = Substitute.For<IEventRendition>();
             
             //_track1 = Substitute.For<ITrackData>();
             //_track2 = Substitute.For<ITrackData>();
